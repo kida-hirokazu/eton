@@ -1,0 +1,123 @@
+{
+    "test_suite": "TOON-IR Accuracy Benchmark",
+    "description": "Questions matching TOON benchmark format, data provided in IR format",
+    "tests": [
+        {
+            "id": "tabular-field-001",
+            "category": "field-retrieval",
+            "dataset": "tabular",
+            "ir_data": "$Employee:id,name,email,dept,salary,exp,active\n1,Alice Smith,alice@example.com,Engineering,95000,8,T\n2,Bob Johnson,bob@example.com,Sales,72000,3,T\n3,Carol White,carol@example.com,Marketing,68000,5,F\n4,David Brown,david@example.com,Engineering,115000,12,T\n5,Eve Davis,eve@example.com,HR,58000,2,T",
+            "question": "What is the salary of Alice Smith?",
+            "expected": "95000",
+            "answer_type": "integer"
+        },
+        {
+            "id": "tabular-field-002",
+            "category": "field-retrieval",
+            "dataset": "tabular",
+            "ir_data": "$Employee:id,name,email,dept,salary,exp,active\n1,Alice Smith,alice@example.com,Engineering,95000,8,T\n2,Bob Johnson,bob@example.com,Sales,72000,3,T\n3,Carol White,carol@example.com,Marketing,68000,5,F\n4,David Brown,david@example.com,Engineering,115000,12,T\n5,Eve Davis,eve@example.com,HR,58000,2,T",
+            "question": "What department does David Brown work in?",
+            "expected": "Engineering",
+            "answer_type": "string"
+        },
+        {
+            "id": "tabular-agg-001",
+            "category": "aggregation",
+            "dataset": "tabular",
+            "ir_data": "$Employee:id,name,email,dept,salary,exp,active\n1,Alice Smith,alice@example.com,Engineering,95000,8,T\n2,Bob Johnson,bob@example.com,Sales,72000,3,T\n3,Carol White,carol@example.com,Marketing,68000,5,F\n4,David Brown,david@example.com,Engineering,115000,12,T\n5,Eve Davis,eve@example.com,HR,58000,2,T\n$Audit:count=5,sum=408000",
+            "question": "How many employees work in Engineering?",
+            "expected": "2",
+            "answer_type": "integer"
+        },
+        {
+            "id": "tabular-agg-002",
+            "category": "aggregation",
+            "dataset": "tabular",
+            "ir_data": "$Employee:id,name,email,dept,salary,exp,active\n1,Alice Smith,alice@example.com,Engineering,95000,8,T\n2,Bob Johnson,bob@example.com,Sales,72000,3,T\n3,Carol White,carol@example.com,Marketing,68000,5,F\n4,David Brown,david@example.com,Engineering,115000,12,T\n5,Eve Davis,eve@example.com,HR,58000,2,T\n$Audit:count=5,sum=408000",
+            "question": "How many employees have a salary greater than 70000?",
+            "expected": "3",
+            "answer_type": "integer"
+        },
+        {
+            "id": "tabular-agg-003",
+            "category": "aggregation",
+            "dataset": "tabular",
+            "ir_data": "$Employee:id,name,email,dept,salary,exp,active\n1,Alice Smith,alice@example.com,Engineering,95000,8,T\n2,Bob Johnson,bob@example.com,Sales,72000,3,T\n3,Carol White,carol@example.com,Marketing,68000,5,F\n4,David Brown,david@example.com,Engineering,115000,12,T\n5,Eve Davis,eve@example.com,HR,58000,2,T\n$Audit:count=5,sum=408000",
+            "question": "How many employees are active?",
+            "expected": "4",
+            "answer_type": "integer"
+        },
+        {
+            "id": "tabular-filter-001",
+            "category": "filtering",
+            "dataset": "tabular",
+            "ir_data": "$Employee:id,name,email,dept,salary,exp,active\n1,Alice Smith,alice@example.com,Engineering,95000,8,T\n2,Bob Johnson,bob@example.com,Sales,72000,3,T\n3,Carol White,carol@example.com,Marketing,68000,5,F\n4,David Brown,david@example.com,Engineering,115000,12,T\n5,Eve Davis,eve@example.com,HR,58000,2,T",
+            "question": "How many active employees have more than 5 years of experience?",
+            "expected": "2",
+            "answer_type": "integer"
+        },
+        {
+            "id": "nested-field-001",
+            "category": "field-retrieval",
+            "dataset": "nested",
+            "ir_data": "$Order:id,custName,sub,tax,total,status,date\n$Item:sku,name,qty,price\n$Order:ORD-001,John Doe,150.00,12.00,162.00,shipped,2025-01-15\nSKU-A1,Widget,2,50.00\nSKU-B2,Gadget,1,50.00\n$Order:ORD-002,Jane Smith,200.00,16.00,216.00,pending,2025-01-16\nSKU-C3,Device,4,50.00\n$Order:ORD-003,Mike Chen,80.00,6.40,86.40,delivered,2025-01-17\nSKU-A1,Widget,1,50.00\nSKU-D4,Tool,1,30.00",
+            "question": "What is the total for order ORD-002?",
+            "expected": "216.00",
+            "answer_type": "number"
+        },
+        {
+            "id": "nested-field-002",
+            "category": "field-retrieval",
+            "dataset": "nested",
+            "ir_data": "$Order:id,custName,sub,tax,total,status,date\n$Item:sku,name,qty,price\n$Order:ORD-001,John Doe,150.00,12.00,162.00,shipped,2025-01-15\nSKU-A1,Widget,2,50.00\nSKU-B2,Gadget,1,50.00\n$Order:ORD-002,Jane Smith,200.00,16.00,216.00,pending,2025-01-16\nSKU-C3,Device,4,50.00\n$Order:ORD-003,Mike Chen,80.00,6.40,86.40,delivered,2025-01-17\nSKU-A1,Widget,1,50.00\nSKU-D4,Tool,1,30.00",
+            "question": "What is the customer name for order ORD-003?",
+            "expected": "Mike Chen",
+            "answer_type": "string"
+        },
+        {
+            "id": "nested-agg-001",
+            "category": "aggregation",
+            "dataset": "nested",
+            "ir_data": "$Order:id,custName,sub,tax,total,status,date\n$Order:ORD-001,John Doe,150.00,12.00,162.00,shipped,2025-01-15\n$Order:ORD-002,Jane Smith,200.00,16.00,216.00,pending,2025-01-16\n$Order:ORD-003,Mike Chen,80.00,6.40,86.40,delivered,2025-01-17\n$Audit:orders=3,sum=464.40",
+            "question": "How many orders have status \"shipped\"?",
+            "expected": "1",
+            "answer_type": "integer"
+        },
+        {
+            "id": "nested-agg-002",
+            "category": "aggregation",
+            "dataset": "nested",
+            "ir_data": "$Order:id,custName,sub,tax,total,status,date\n$Order:ORD-001,John Doe,150.00,12.00,162.00,shipped,2025-01-15\n$Order:ORD-002,Jane Smith,200.00,16.00,216.00,pending,2025-01-16\n$Order:ORD-003,Mike Chen,80.00,6.40,86.40,delivered,2025-01-17\n$Audit:orders=3,sum=464.40",
+            "question": "What is the total revenue across all orders?",
+            "expected": "464.40",
+            "answer_type": "number"
+        },
+        {
+            "id": "nested-filter-001",
+            "category": "filtering",
+            "dataset": "nested",
+            "ir_data": "$Order:id,custName,sub,tax,total,status,date\n$Order:ORD-001,John Doe,150.00,12.00,162.00,shipped,2025-01-15\n$Order:ORD-002,Jane Smith,200.00,16.00,216.00,pending,2025-01-16\n$Order:ORD-003,Mike Chen,80.00,6.40,86.40,delivered,2025-01-17\n$Order:ORD-004,Sarah Lee,300.00,24.00,324.00,shipped,2025-01-18",
+            "question": "How many orders have status \"shipped\" and total greater than 100?",
+            "expected": "2",
+            "answer_type": "integer"
+        },
+        {
+            "id": "analytics-field-001",
+            "category": "field-retrieval",
+            "dataset": "analytics",
+            "ir_data": "$Metric:date,views,clicks,conv,rev,bounce\n2025-01-01,5200,312,28,2450.50,0.42\n2025-01-02,4800,288,22,1890.00,0.45\n2025-01-03,6100,427,35,3200.75,0.38",
+            "question": "What was the revenue on 2025-01-02?",
+            "expected": "1890.00",
+            "answer_type": "number"
+        },
+        {
+            "id": "analytics-agg-001",
+            "category": "aggregation",
+            "dataset": "analytics",
+            "ir_data": "$Metric:date,views,clicks,conv,rev,bounce\n2025-01-01,5200,312,28,2450.50,0.42\n2025-01-02,4800,288,22,1890.00,0.45\n2025-01-03,6100,427,35,3200.75,0.38\n$Audit:count=3,sum=7541.25",
+            "question": "What is the total revenue across all days?",
+            "expected": "7541.25",
+            "answer_type": "number"
+        }
+    ]
+}

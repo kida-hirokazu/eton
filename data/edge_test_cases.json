@@ -1,0 +1,206 @@
+{
+    "schemas": {
+        "Emp": [
+            {
+                "name": "id",
+                "type": "str"
+            },
+            {
+                "name": "name",
+                "type": "str"
+            },
+            {
+                "name": "dept",
+                "dict": "Dept"
+            },
+            {
+                "name": "salary",
+                "type": "int"
+            },
+            {
+                "name": "active",
+                "type": "bool"
+            }
+        ],
+        "Order": [
+            {
+                "name": "id",
+                "type": "str"
+            },
+            {
+                "name": "customer",
+                "type": "str"
+            },
+            {
+                "name": "total",
+                "type": "float"
+            },
+            {
+                "name": "items",
+                "type": "list"
+            }
+        ]
+    },
+    "dictionaries": {
+        "Dept": {
+            "10": "Sales",
+            "20": "Engineering",
+            "30": "HR"
+        }
+    },
+    "test_cases": [
+        {
+            "id": "emp_retrieval_1",
+            "category": "Field Retrieval",
+            "schema": "Emp",
+            "data": [
+                [
+                    "E001",
+                    "Alice",
+                    "@10",
+                    75000,
+                    true
+                ],
+                [
+                    "E002",
+                    "Bob",
+                    "@20",
+                    90000,
+                    true
+                ],
+                [
+                    "E003",
+                    "Charlie",
+                    "@20",
+                    85000,
+                    false
+                ],
+                [
+                    "E004",
+                    "David",
+                    "@30",
+                    60000,
+                    true
+                ],
+                [
+                    "E005",
+                    "Eve",
+                    "@10",
+                    80000,
+                    true
+                ]
+            ],
+            "question": "Bobの部門は何ですか？",
+            "expected": "Engineering"
+        },
+        {
+            "id": "emp_agg_1",
+            "category": "Aggregation",
+            "schema": "Emp",
+            "data": [
+                [
+                    "E001",
+                    "Alice",
+                    "@10",
+                    75000,
+                    true
+                ],
+                [
+                    "E002",
+                    "Bob",
+                    "@20",
+                    90000,
+                    true
+                ],
+                [
+                    "E003",
+                    "Charlie",
+                    "@20",
+                    85000,
+                    false
+                ],
+                [
+                    "E004",
+                    "David",
+                    "@30",
+                    60000,
+                    true
+                ],
+                [
+                    "E005",
+                    "Eve",
+                    "@10",
+                    80000,
+                    true
+                ]
+            ],
+            "question": "Engineering部門に所属する従業員の合計給与(salary)はいくらですか？",
+            "expected": "175000"
+        },
+        {
+            "id": "emp_filter_1",
+            "category": "Filtering",
+            "schema": "Emp",
+            "data": [
+                [
+                    "E001",
+                    "Alice",
+                    "@10",
+                    75000,
+                    true
+                ],
+                [
+                    "E002",
+                    "Bob",
+                    "@20",
+                    90000,
+                    true
+                ],
+                [
+                    "E003",
+                    "Charlie",
+                    "@20",
+                    85000,
+                    false
+                ],
+                [
+                    "E004",
+                    "David",
+                    "@30",
+                    60000,
+                    true
+                ],
+                [
+                    "E005",
+                    "Eve",
+                    "@10",
+                    80000,
+                    true
+                ]
+            ],
+            "question": "給与が80000以上で、かつ現在 active な従業員の名前をすべて挙げてください。",
+            "expected": "Bob, Eve"
+        },
+        {
+            "id": "order_list_1",
+            "category": "Nested/List",
+            "schema": "Order",
+            "data": [
+                [
+                    "ORD-01",
+                    "John",
+                    150.50,
+                    "(Laptop;Mouse)"
+                ],
+                [
+                    "ORD-02",
+                    "Sarah",
+                    45.00,
+                    "(Keyboard)"
+                ]
+            ],
+            "question": "ORD-01の注文には何個のアイテムが含まれていますか？",
+            "expected": "2"
+        }
+    ]
+}

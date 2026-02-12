@@ -1,0 +1,156 @@
+{
+  "environment": "development",
+  "version": "6.8.3",
+  "database": {
+    "host": "guilty-cake.org",
+    "port": 5432,
+    "name": "real",
+    "pool": {
+      "min": 2,
+      "max": 37,
+      "idleTimeout": 30000
+    },
+    "replicas": [
+      {
+        "host": "replica-1.shameless-eyeliner.net",
+        "port": 5432,
+        "priority": 1
+      },
+      {
+        "host": "replica-2.athletic-louse.net",
+        "port": 5432,
+        "priority": 2
+      },
+      {
+        "host": "replica-3.immense-fold.biz",
+        "port": 5432,
+        "priority": 3
+      }
+    ]
+  },
+  "features": {
+    "darkMode": {
+      "enabled": false,
+      "rollout": 10,
+      "variants": [
+        {
+          "name": "default",
+          "weight": 70,
+          "config": {
+            "theme": "dark",
+            "animations": true
+          }
+        },
+        {
+          "name": "minimal",
+          "weight": 30,
+          "config": {
+            "theme": "dark",
+            "animations": false
+          }
+        }
+      ]
+    },
+    "analytics": {
+      "enabled": false,
+      "rollout": 0,
+      "variants": [
+        {
+          "name": "full",
+          "weight": 100,
+          "config": {
+            "tracking": "all",
+            "sampling": 1
+          }
+        }
+      ]
+    }
+  },
+  "authentication": {
+    "providers": [
+      {
+        "name": "oauth2",
+        "clientId": "f7a98271-13e6-41f0-a212-9176ac0bb4ab",
+        "scopes": [
+          "read",
+          "write",
+          "admin"
+        ],
+        "config": {
+          "authUrl": "https://ruddy-hornet.net",
+          "tokenUrl": "https://clumsy-academics.info"
+        }
+      },
+      {
+        "name": "saml",
+        "clientId": "d7de9112-2e17-4c96-bc3c-136e3a8330eb",
+        "scopes": [
+          "read"
+        ],
+        "config": {
+          "entryPoint": "https://insignificant-veto.org",
+          "cert": "qNNb4QJZpJgIwTbbiMDu6kX3pmnREHkWzckoRBiENJ0cYdcn6uBkzmh7csnmZS9l"
+        }
+      }
+    ],
+    "session": {
+      "secret": "0cmVRSoh9mRzIWE7SLVtBVweZHPQywgT",
+      "duration": 86400,
+      "refreshThreshold": 3600
+    }
+  },
+  "permissions": {
+    "roles": {
+      "admin": {
+        "permissions": [
+          "read",
+          "write",
+          "delete",
+          "manage_users",
+          "manage_roles"
+        ],
+        "inherits": []
+      },
+      "editor": {
+        "permissions": [
+          "read",
+          "write"
+        ],
+        "inherits": [
+          "viewer"
+        ]
+      },
+      "viewer": {
+        "permissions": [
+          "read"
+        ],
+        "inherits": []
+      }
+    },
+    "groups": {
+      "engineering": {
+        "members": [
+          "Garrett_Hills@yahoo.com",
+          "Sylvester19@gmail.com",
+          "Demarco.Goodwin@hotmail.com",
+          "Tiana19@hotmail.com",
+          "Anahi_Durgan85@hotmail.com"
+        ],
+        "roles": [
+          "admin",
+          "editor"
+        ]
+      },
+      "support": {
+        "members": [
+          "Elinore.Lemke@yahoo.com",
+          "Malvina18@gmail.com",
+          "Cristina_Marks@hotmail.com"
+        ],
+        "roles": [
+          "viewer"
+        ]
+      }
+    }
+  }
+}

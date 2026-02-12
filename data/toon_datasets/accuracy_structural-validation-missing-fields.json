@@ -1,0 +1,180 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Heather Kuvalis",
+      "department": "Engineering",
+      "salary": 142730,
+      "yearsExperience": 22,
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Mandy Kerluke",
+      "email": "rosalyn_thompson14@hotmail.com",
+      "department": "Sales",
+      "salary": 62196,
+      "yearsExperience": 18,
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Johnathan Kuphal",
+      "email": "rose_zboncak@hotmail.com",
+      "department": "Marketing",
+      "salary": 117071,
+      "yearsExperience": 3,
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "Christian Fay",
+      "email": "eric_rolfson82@gmail.com",
+      "department": "HR",
+      "salary": 115653,
+      "yearsExperience": 21,
+      "active": false
+    },
+    {
+      "id": 5,
+      "name": "Sidney Morissette",
+      "email": "brandi.hodkiewicz87@yahoo.com",
+      "department": "Operations",
+      "salary": 133837,
+      "yearsExperience": 4,
+      "active": true
+    },
+    {
+      "id": 6,
+      "name": "Mamie Grady",
+      "department": "Finance",
+      "salary": 84126,
+      "yearsExperience": 3,
+      "active": true
+    },
+    {
+      "id": 7,
+      "name": "Troy Maggio",
+      "email": "alexane.kuvalis@hotmail.com",
+      "department": "Engineering",
+      "salary": 77845,
+      "yearsExperience": 9,
+      "active": true
+    },
+    {
+      "id": 8,
+      "name": "Loretta Marks Sr.",
+      "email": "emmet_bradtke15@gmail.com",
+      "department": "Sales",
+      "salary": 147862,
+      "yearsExperience": 18,
+      "active": true
+    },
+    {
+      "id": 9,
+      "name": "Norma Olson",
+      "email": "josianne_herzog@yahoo.com",
+      "department": "Marketing",
+      "salary": 143051,
+      "yearsExperience": 25,
+      "active": true
+    },
+    {
+      "id": 10,
+      "name": "Angel Muller",
+      "email": "oswald.muller42@gmail.com",
+      "department": "HR",
+      "salary": 56205,
+      "yearsExperience": 4,
+      "active": false
+    },
+    {
+      "id": 11,
+      "name": "Ora Moore MD",
+      "department": "Operations",
+      "salary": 93966,
+      "yearsExperience": 13,
+      "active": true
+    },
+    {
+      "id": 12,
+      "name": "Mr. Adam Rath",
+      "email": "caitlyn69@yahoo.com",
+      "department": "Finance",
+      "salary": 126463,
+      "yearsExperience": 15,
+      "active": true
+    },
+    {
+      "id": 13,
+      "name": "Theodore Stark",
+      "email": "laverne_hintz62@gmail.com",
+      "department": "Engineering",
+      "salary": 63322,
+      "yearsExperience": 15,
+      "active": true
+    },
+    {
+      "id": 14,
+      "name": "Gregg Conroy",
+      "email": "ana.collins75@hotmail.com",
+      "department": "Sales",
+      "salary": 52121,
+      "yearsExperience": 9,
+      "active": false
+    },
+    {
+      "id": 15,
+      "name": "Ms. Karen Hyatt",
+      "email": "tiana_runolfsdottir@yahoo.com",
+      "department": "Marketing",
+      "salary": 70821,
+      "yearsExperience": 4,
+      "active": false
+    },
+    {
+      "id": 16,
+      "name": "Miss Angela Nicolas",
+      "department": "HR",
+      "salary": 107365,
+      "yearsExperience": 5,
+      "active": false
+    },
+    {
+      "id": 17,
+      "name": "Kristin Russel",
+      "email": "amaya39@gmail.com",
+      "department": "Operations",
+      "salary": 145946,
+      "yearsExperience": 24,
+      "active": true
+    },
+    {
+      "id": 18,
+      "name": "Salvador Ebert II",
+      "email": "reuben_orn@yahoo.com",
+      "department": "Finance",
+      "salary": 98672,
+      "yearsExperience": 8,
+      "active": true
+    },
+    {
+      "id": 19,
+      "name": "Taylor Schultz",
+      "email": "thomas93@gmail.com",
+      "department": "Engineering",
+      "salary": 60158,
+      "yearsExperience": 8,
+      "active": true
+    },
+    {
+      "id": 20,
+      "name": "Rosa Mitchell",
+      "email": "alize_ankunding61@yahoo.com",
+      "department": "Sales",
+      "salary": 129138,
+      "yearsExperience": 25,
+      "active": true
+    }
+  ]
+}

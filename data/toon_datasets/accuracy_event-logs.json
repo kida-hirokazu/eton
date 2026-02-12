@@ -1,0 +1,769 @@
+{
+  "logs": [
+    {
+      "timestamp": "2026-02-05T10:43:58.237Z",
+      "level": "error",
+      "endpoint": "/api/products",
+      "statusCode": 584,
+      "responseTime": 2544,
+      "userId": 5390,
+      "error": {
+        "message": "Rate limit exceeded",
+        "stack": "Error: Delego debitis tantillus apparatus aeneus capio.\n  at acervus\n  at explicabo",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-04T08:05:01.306Z",
+      "level": "error",
+      "endpoint": "/api/users",
+      "statusCode": 453,
+      "responseTime": 904,
+      "userId": 6237,
+      "error": {
+        "message": "Resource not found",
+        "stack": "Error: Absorbeo aiunt arcesso uredo vinculum sordeo maiores toties auctus.\n  at desipio\n  at utpote",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-02T10:46:31.980Z",
+      "level": "error",
+      "endpoint": "/api/products",
+      "statusCode": 499,
+      "responseTime": 1377,
+      "userId": 9559,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: At cotidie advoco benevolentia depromo voveo tero cupiditas apparatus comitatus.\n  at depono\n  at antepono",
+        "retryable": false
+      }
+    },
+    {
+      "timestamp": "2026-02-03T17:40:38.068Z",
+      "level": "warn",
+      "endpoint": "/api/auth",
+      "statusCode": 223,
+      "responseTime": 1317,
+      "userId": 8042
+    },
+    {
+      "timestamp": "2026-02-04T06:45:42.104Z",
+      "level": "error",
+      "endpoint": "/api/products",
+      "statusCode": 539,
+      "responseTime": 1277,
+      "userId": 2639,
+      "error": {
+        "message": "Internal server error",
+        "stack": "Error: Thesaurus cicuta aegre tum.\n  at defungo\n  at voluptas",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-02T20:20:22.898Z",
+      "level": "info",
+      "endpoint": "/api/users",
+      "statusCode": 257,
+      "responseTime": 1411,
+      "userId": 4220
+    },
+    {
+      "timestamp": "2026-02-07T02:39:06.283Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 298,
+      "responseTime": 2057,
+      "userId": 7390
+    },
+    {
+      "timestamp": "2026-02-03T20:59:48.201Z",
+      "level": "warn",
+      "endpoint": "/api/orders",
+      "statusCode": 292,
+      "responseTime": 1278,
+      "userId": 3051
+    },
+    {
+      "timestamp": "2026-02-03T18:17:34.250Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 215,
+      "responseTime": 1989,
+      "userId": 1405
+    },
+    {
+      "timestamp": "2026-02-02T10:46:33.495Z",
+      "level": "warn",
+      "endpoint": "/api/users",
+      "statusCode": 262,
+      "responseTime": 3344,
+      "userId": 1687
+    },
+    {
+      "timestamp": "2026-02-04T17:45:50.850Z",
+      "level": "error",
+      "endpoint": "/api/auth",
+      "statusCode": 424,
+      "responseTime": 4522,
+      "userId": 6826,
+      "error": {
+        "message": "Internal server error",
+        "stack": "Error: Vulgus vesper arbor.\n  at similique\n  at abundans",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T06:02:14.142Z",
+      "level": "error",
+      "endpoint": "/api/orders",
+      "statusCode": 593,
+      "responseTime": 4854,
+      "userId": 7653,
+      "error": {
+        "message": "Internal server error",
+        "stack": "Error: Addo error cultura synagoga trepide canto credo acervus aestas venio.\n  at depereo\n  at arbor",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-09T03:38:22.281Z",
+      "level": "warn",
+      "endpoint": "/api/orders",
+      "statusCode": 279,
+      "responseTime": 2762,
+      "userId": 8886
+    },
+    {
+      "timestamp": "2026-02-04T05:51:52.534Z",
+      "level": "warn",
+      "endpoint": "/api/payments",
+      "statusCode": 215,
+      "responseTime": 2003,
+      "userId": 7473
+    },
+    {
+      "timestamp": "2026-02-04T02:16:09.526Z",
+      "level": "info",
+      "endpoint": "/api/products",
+      "statusCode": 214,
+      "responseTime": 2317,
+      "userId": 3603
+    },
+    {
+      "timestamp": "2026-02-06T06:03:24.937Z",
+      "level": "warn",
+      "endpoint": "/api/payments",
+      "statusCode": 288,
+      "responseTime": 2849,
+      "userId": 6441
+    },
+    {
+      "timestamp": "2026-02-04T01:03:39.907Z",
+      "level": "info",
+      "endpoint": "/api/users",
+      "statusCode": 226,
+      "responseTime": 4763,
+      "userId": 6340
+    },
+    {
+      "timestamp": "2026-02-06T17:14:30.043Z",
+      "level": "info",
+      "endpoint": "/api/users",
+      "statusCode": 217,
+      "responseTime": 2443,
+      "userId": 8416
+    },
+    {
+      "timestamp": "2026-02-05T17:55:04.430Z",
+      "level": "error",
+      "endpoint": "/api/auth",
+      "statusCode": 587,
+      "responseTime": 2714,
+      "userId": 2604,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: Turba solutio molestias.\n  at quia\n  at uxor",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-03T02:50:11.597Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 247,
+      "responseTime": 454,
+      "userId": 9932
+    },
+    {
+      "timestamp": "2026-02-04T15:55:24.734Z",
+      "level": "info",
+      "endpoint": "/api/payments",
+      "statusCode": 234,
+      "responseTime": 1696,
+      "userId": 1071
+    },
+    {
+      "timestamp": "2026-02-02T20:08:46.866Z",
+      "level": "warn",
+      "endpoint": "/api/auth",
+      "statusCode": 247,
+      "responseTime": 3715,
+      "userId": 5109
+    },
+    {
+      "timestamp": "2026-02-06T09:46:45.362Z",
+      "level": "info",
+      "endpoint": "/api/payments",
+      "statusCode": 217,
+      "responseTime": 409,
+      "userId": 7577
+    },
+    {
+      "timestamp": "2026-02-02T21:51:38.804Z",
+      "level": "error",
+      "endpoint": "/api/products",
+      "statusCode": 508,
+      "responseTime": 2747,
+      "userId": 8690,
+      "error": {
+        "message": "Database connection timeout",
+        "stack": "Error: Congregatio trans solium terra nulla abeo corroboro aperio creptio.\n  at capitulus\n  at varius",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-02T23:21:55.580Z",
+      "level": "info",
+      "endpoint": "/api/payments",
+      "statusCode": 225,
+      "responseTime": 2348,
+      "userId": 3892
+    },
+    {
+      "timestamp": "2026-02-08T23:37:01.180Z",
+      "level": "error",
+      "endpoint": "/api/orders",
+      "statusCode": 483,
+      "responseTime": 2313,
+      "userId": 8400,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: Uxor casso torrens caritas tam delicate perferendis denego.\n  at aequus\n  at beatus",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-05T07:55:32.376Z",
+      "level": "error",
+      "endpoint": "/api/auth",
+      "statusCode": 429,
+      "responseTime": 4858,
+      "userId": 4806,
+      "error": {
+        "message": "Internal server error",
+        "stack": "Error: Viscus quidem arbor cohaero vulgus canto quam.\n  at arcesso\n  at debitis",
+        "retryable": false
+      }
+    },
+    {
+      "timestamp": "2026-02-09T03:26:52.311Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 233,
+      "responseTime": 2795,
+      "userId": 9702
+    },
+    {
+      "timestamp": "2026-02-08T17:56:13.276Z",
+      "level": "error",
+      "endpoint": "/api/users",
+      "statusCode": 596,
+      "responseTime": 296,
+      "userId": 2813,
+      "error": {
+        "message": "Rate limit exceeded",
+        "stack": "Error: Cruciamentum custodia capillus absorbeo.\n  at adeptio\n  at advoco",
+        "retryable": false
+      }
+    },
+    {
+      "timestamp": "2026-02-04T18:38:06.099Z",
+      "level": "error",
+      "endpoint": "/api/payments",
+      "statusCode": 402,
+      "responseTime": 1891,
+      "userId": 7641,
+      "error": {
+        "message": "Resource not found",
+        "stack": "Error: Attero adulescens blanditiis.\n  at celebrer\n  at allatus",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-08T17:34:54.064Z",
+      "level": "error",
+      "endpoint": "/api/products",
+      "statusCode": 435,
+      "responseTime": 4814,
+      "userId": 2524,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: Earum adinventitias adipiscor.\n  at vomica\n  at conitor",
+        "retryable": false
+      }
+    },
+    {
+      "timestamp": "2026-02-07T01:49:12.019Z",
+      "level": "info",
+      "endpoint": "/api/users",
+      "statusCode": 226,
+      "responseTime": 1368,
+      "userId": 3376
+    },
+    {
+      "timestamp": "2026-02-02T15:18:06.385Z",
+      "level": "warn",
+      "endpoint": "/api/products",
+      "statusCode": 280,
+      "responseTime": 2713,
+      "userId": 5462
+    },
+    {
+      "timestamp": "2026-02-06T20:40:38.978Z",
+      "level": "warn",
+      "endpoint": "/api/payments",
+      "statusCode": 221,
+      "responseTime": 4077,
+      "userId": 6836
+    },
+    {
+      "timestamp": "2026-02-04T06:04:38.136Z",
+      "level": "warn",
+      "endpoint": "/api/orders",
+      "statusCode": 234,
+      "responseTime": 3006,
+      "userId": 3534
+    },
+    {
+      "timestamp": "2026-02-03T17:45:16.942Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 248,
+      "responseTime": 408,
+      "userId": 8792
+    },
+    {
+      "timestamp": "2026-02-03T21:55:01.400Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 206,
+      "responseTime": 1713,
+      "userId": 8404
+    },
+    {
+      "timestamp": "2026-02-03T06:13:56.874Z",
+      "level": "error",
+      "endpoint": "/api/payments",
+      "statusCode": 573,
+      "responseTime": 2358,
+      "userId": 8539,
+      "error": {
+        "message": "Resource not found",
+        "stack": "Error: Culpa comis hic cubo depromo minus nam.\n  at acerbitas\n  at carpo",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-03T18:52:58.493Z",
+      "level": "error",
+      "endpoint": "/api/auth",
+      "statusCode": 458,
+      "responseTime": 2515,
+      "userId": 7858,
+      "error": {
+        "message": "Rate limit exceeded",
+        "stack": "Error: Iure depopulo aqua volup surculus.\n  at aspernatur\n  at baiulus",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-08T23:03:58.054Z",
+      "level": "error",
+      "endpoint": "/api/payments",
+      "statusCode": 537,
+      "responseTime": 1937,
+      "userId": 4732,
+      "error": {
+        "message": "Resource not found",
+        "stack": "Error: Tabgo minus usque caelum delego summa substantia.\n  at atque\n  at subito",
+        "retryable": false
+      }
+    },
+    {
+      "timestamp": "2026-02-08T19:12:38.654Z",
+      "level": "error",
+      "endpoint": "/api/orders",
+      "statusCode": 439,
+      "responseTime": 535,
+      "userId": 7732,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: Bestia vinitor tamdiu aveho appositus.\n  at uberrime\n  at umquam",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-02T21:32:35.017Z",
+      "level": "error",
+      "endpoint": "/api/products",
+      "statusCode": 578,
+      "responseTime": 4140,
+      "userId": 2803,
+      "error": {
+        "message": "Database connection timeout",
+        "stack": "Error: Ascisco tego sursum occaecati delinquo.\n  at corroboro\n  at ullus",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-09T03:58:06.413Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 296,
+      "responseTime": 2032,
+      "userId": 5946
+    },
+    {
+      "timestamp": "2026-02-05T18:43:00.714Z",
+      "level": "warn",
+      "endpoint": "/api/auth",
+      "statusCode": 467,
+      "responseTime": 4261,
+      "userId": 2463,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: Color adopto antiquus crebro.\n  at appositus\n  at ipsa",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-04T09:26:42.296Z",
+      "level": "error",
+      "endpoint": "/api/users",
+      "statusCode": 538,
+      "responseTime": 3393,
+      "userId": 4844,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: Concedo combibo adstringo torqueo sonitus cuppedia cetera.\n  at vereor\n  at ara",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-06T15:43:21.809Z",
+      "level": "info",
+      "endpoint": "/api/users",
+      "statusCode": 227,
+      "responseTime": 4009,
+      "userId": 8485
+    },
+    {
+      "timestamp": "2026-02-04T17:23:57.905Z",
+      "level": "warn",
+      "endpoint": "/api/auth",
+      "statusCode": 267,
+      "responseTime": 752,
+      "userId": 2168
+    },
+    {
+      "timestamp": "2026-02-04T00:37:32.389Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 246,
+      "responseTime": 2865,
+      "userId": 2154
+    },
+    {
+      "timestamp": "2026-02-07T09:38:39.590Z",
+      "level": "warn",
+      "endpoint": "/api/users",
+      "statusCode": 204,
+      "responseTime": 4860,
+      "userId": 8389
+    },
+    {
+      "timestamp": "2026-02-03T08:54:03.308Z",
+      "level": "error",
+      "endpoint": "/api/auth",
+      "statusCode": 436,
+      "responseTime": 4041,
+      "userId": 3357,
+      "error": {
+        "message": "Database connection timeout",
+        "stack": "Error: Contabesco verbera utrum sequi conatus agnitio valeo clamo temporibus.\n  at reiciendis\n  at eligendi",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-06T02:33:30.084Z",
+      "level": "error",
+      "endpoint": "/api/orders",
+      "statusCode": 522,
+      "responseTime": 1903,
+      "userId": 2770,
+      "error": {
+        "message": "Rate limit exceeded",
+        "stack": "Error: Conor curo vir urbs villa utroque versus advenio.\n  at assumenda\n  at cohors",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T19:50:13.258Z",
+      "level": "error",
+      "endpoint": "/api/users",
+      "statusCode": 499,
+      "responseTime": 2028,
+      "userId": 8188,
+      "error": {
+        "message": "Database connection timeout",
+        "stack": "Error: Arcesso pecco atrox ascisco cruentus utpote cetera supplanto vestigium.\n  at viridis\n  at ars",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-06T12:48:35.753Z",
+      "level": "info",
+      "endpoint": "/api/users",
+      "statusCode": 203,
+      "responseTime": 2146,
+      "userId": 8119
+    },
+    {
+      "timestamp": "2026-02-04T09:06:30.197Z",
+      "level": "info",
+      "endpoint": "/api/users",
+      "statusCode": 246,
+      "responseTime": 3072,
+      "userId": 5244
+    },
+    {
+      "timestamp": "2026-02-09T04:07:27.225Z",
+      "level": "info",
+      "endpoint": "/api/users",
+      "statusCode": 269,
+      "responseTime": 508,
+      "userId": 9613
+    },
+    {
+      "timestamp": "2026-02-06T21:44:18.855Z",
+      "level": "warn",
+      "endpoint": "/api/payments",
+      "statusCode": 475,
+      "responseTime": 703,
+      "userId": 2739,
+      "error": {
+        "message": "Database connection timeout",
+        "stack": "Error: Coerceo aureus corpus arca vere depraedor quis.\n  at charisma\n  at denego",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T14:42:25.946Z",
+      "level": "error",
+      "endpoint": "/api/products",
+      "statusCode": 585,
+      "responseTime": 862,
+      "userId": 5702,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: Subseco admoveo vomito nostrum verumtamen.\n  at calcar\n  at carbo",
+        "retryable": false
+      }
+    },
+    {
+      "timestamp": "2026-02-03T05:23:43.523Z",
+      "level": "error",
+      "endpoint": "/api/orders",
+      "statusCode": 500,
+      "responseTime": 1359,
+      "userId": 7041,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: Harum incidunt cupressus turpis argentum cuppedia canto custodia doloribus.\n  at cursus\n  at cruciamentum",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-05T07:37:14.215Z",
+      "level": "info",
+      "endpoint": "/api/users",
+      "statusCode": 217,
+      "responseTime": 351,
+      "userId": 9025
+    },
+    {
+      "timestamp": "2026-02-08T10:43:25.458Z",
+      "level": "warn",
+      "endpoint": "/api/orders",
+      "statusCode": 294,
+      "responseTime": 50,
+      "userId": 9000
+    },
+    {
+      "timestamp": "2026-02-03T14:57:33.256Z",
+      "level": "info",
+      "endpoint": "/api/orders",
+      "statusCode": 229,
+      "responseTime": 4922,
+      "userId": 9798
+    },
+    {
+      "timestamp": "2026-02-08T22:18:03.646Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 294,
+      "responseTime": 3986,
+      "userId": 6215
+    },
+    {
+      "timestamp": "2026-02-09T00:06:39.167Z",
+      "level": "info",
+      "endpoint": "/api/auth",
+      "statusCode": 232,
+      "responseTime": 2253,
+      "userId": 9718
+    },
+    {
+      "timestamp": "2026-02-07T20:30:21.092Z",
+      "level": "error",
+      "endpoint": "/api/users",
+      "statusCode": 435,
+      "responseTime": 1287,
+      "userId": 2575,
+      "error": {
+        "message": "Rate limit exceeded",
+        "stack": "Error: Adeo repellat libero vulticulus universe ventosus spero valeo ducimus.\n  at pariatur\n  at supellex",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-06T04:18:04.833Z",
+      "level": "info",
+      "endpoint": "/api/products",
+      "statusCode": 285,
+      "responseTime": 2973,
+      "userId": 1035
+    },
+    {
+      "timestamp": "2026-02-09T01:17:24.745Z",
+      "level": "info",
+      "endpoint": "/api/payments",
+      "statusCode": 291,
+      "responseTime": 1563,
+      "userId": 9885
+    },
+    {
+      "timestamp": "2026-02-06T03:19:27.771Z",
+      "level": "info",
+      "endpoint": "/api/products",
+      "statusCode": 226,
+      "responseTime": 3420,
+      "userId": 1459
+    },
+    {
+      "timestamp": "2026-02-06T00:56:48.217Z",
+      "level": "error",
+      "endpoint": "/api/users",
+      "statusCode": 496,
+      "responseTime": 2842,
+      "userId": 1633,
+      "error": {
+        "message": "Database connection timeout",
+        "stack": "Error: Curvo creber arca terga cogito arcus cunctatio.\n  at tui\n  at super",
+        "retryable": false
+      }
+    },
+    {
+      "timestamp": "2026-02-06T15:43:50.947Z",
+      "level": "error",
+      "endpoint": "/api/payments",
+      "statusCode": 497,
+      "responseTime": 3605,
+      "userId": 9503,
+      "error": {
+        "message": "Invalid authentication token",
+        "stack": "Error: Id varietas triduana triumphus volubilis trepide tardus.\n  at comis\n  at aliquid",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-08T10:24:30.364Z",
+      "level": "info",
+      "endpoint": "/api/payments",
+      "statusCode": 288,
+      "responseTime": 762,
+      "userId": 1417
+    },
+    {
+      "timestamp": "2026-02-07T12:00:57.029Z",
+      "level": "error",
+      "endpoint": "/api/users",
+      "statusCode": 464,
+      "responseTime": 4139,
+      "userId": 5187,
+      "error": {
+        "message": "Resource not found",
+        "stack": "Error: Utrimque comprehendo laboriosam trans similique conventus valens sumptus adversus veniam.\n  at degero\n  at vinco",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T15:18:25.762Z",
+      "level": "error",
+      "endpoint": "/api/orders",
+      "statusCode": 558,
+      "responseTime": 2896,
+      "userId": 5421,
+      "error": {
+        "message": "Database connection timeout",
+        "stack": "Error: Taedium ad decumbo.\n  at deleo\n  at neque",
+        "retryable": false
+      }
+    },
+    {
+      "timestamp": "2026-02-03T15:23:45.535Z",
+      "level": "warn",
+      "endpoint": "/api/auth",
+      "statusCode": 539,
+      "responseTime": 3299,
+      "userId": 6441,
+      "error": {
+        "message": "Database connection timeout",
+        "stack": "Error: Torqueo defetiscor combibo tres pecto video.\n  at tripudio\n  at circumvenio",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-07T12:06:37.135Z",
+      "level": "warn",
+      "endpoint": "/api/auth",
+      "statusCode": 571,
+      "responseTime": 4182,
+      "userId": 4448,
+      "error": {
+        "message": "Resource not found",
+        "stack": "Error: Tamisium tolero non umerus perspiciatis cuius deporto acsi trans.\n  at vinum\n  at voluptatem",
+        "retryable": true
+      }
+    },
+    {
+      "timestamp": "2026-02-04T23:41:52.580Z",
+      "level": "info",
+      "endpoint": "/api/payments",
+      "statusCode": 293,
+      "responseTime": 2851,
+      "userId": 4302
+    }
+  ]
+}

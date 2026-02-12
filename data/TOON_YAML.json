@@ -1,0 +1,14 @@
+{
+    "task": {
+        "id": 1,
+        "name": "Example",
+        "meta": {
+            "priority": "high",
+            "assignee": "user123",
+            "tracking": {
+                "start_date": "2025-11-16",
+                "estimated_hours": 8
+            }
+        }
+    }
+}
