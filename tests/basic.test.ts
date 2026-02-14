@@ -15,8 +15,8 @@ describe("ETON Basic Round Trip", () => {
         ];
 
         const state = createState();
-        // Use option audit:false to simplify checking
-        const [encoded, newState] = encodeBatch(data, "TestSchema", schemas, state, { audit: false });
+        // Use option audit:false and threshold:0 to trigger symbolization for all
+        const [encoded, newState] = encodeBatch(data, "TestSchema", schemas, state, { audit: false, threshold: 0 });
 
         console.log("Encoded ETON:\n", encoded);
 
@@ -28,8 +28,8 @@ describe("ETON Basic Round Trip", () => {
         // "Alice" -> "@1"
         // true -> "T"
         // "Bob" -> "@2"
-        expect(encoded).toContain('"1","@1","T"');
-        expect(encoded).toContain('"2","@2","F"');
+        expect(encoded).toContain('@1,@2,T');
+        expect(encoded).toContain('@3,@4,F');
 
         // Decode (Debug)
         const decodedItems = [];
@@ -42,16 +42,16 @@ describe("ETON Basic Round Trip", () => {
         const row1 = decodedItems[1];
         expect(row1.type).toBe("data");
         // @ts-ignore
-        expect(row1.info.row).toEqual(["1", "@1", "T"]);
+        expect(row1.info.row).toEqual(["@1", "@2", "T"]);
     });
 
     it("should handle mixed types and special chars", () => {
         const data = [{ val: "Hello, World" }];
         const schema = { CharTest: ["val"] };
-        const [encoded] = encodeBatch(data, "CharTest", schema, createState(), { audit: false });
+        const [encoded] = encodeBatch(data, "CharTest", schema, createState(), { audit: false, threshold: 0 });
 
-        // Expect quoted CSV
-        expect(encoded).toContain('"@1"');
+        // Expect symbol (unquoted if no special chars)
+        expect(encoded).toContain('@1');
 
         // Verify symbol map would contain the raw value
         // (In this test we just check the string output structure)

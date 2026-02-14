@@ -1,5 +1,5 @@
 import { TransformStream } from "node:stream/web";
-import { encodeBatch } from "./encoder";
+import { encodeBatch, type EncodeOptions } from "./encoder";
 import { parse } from "csv-parse/sync";
 import { type SchemaMap } from "./schema";
 import { createState, parseDictionary, resolveSymbol, type SymbolState } from "./symbols";
@@ -24,7 +24,8 @@ function decodeRow(line: string): string[] {
  * Transforms a stream of objects (Record<string, unknown>) into ETON string chunks.
  */
 export class EtonEncoderStream extends TransformStream<Record<string, unknown>, string> {
-    constructor(schemaId: string = "Root", initialSchemas: SchemaMap = {}) {
+    constructor(schemaId: string = "Root", initialSchemas: SchemaMap = {}, options: EncodeOptions = {}) {
+        const finalOptions = { audit: false, ...options };
         // Internal state held in closure
         let state = createState();
         let hasEmittedHeader = false;
@@ -43,7 +44,7 @@ export class EtonEncoderStream extends TransformStream<Record<string, unknown>, 
                 }
 
                 // Core encoding logic reuse
-                const [encoded, newState] = encodeBatch([chunk], schemaId, initialSchemas, state, { audit: false });
+                const [encoded, newState] = encodeBatch([chunk], schemaId, initialSchemas, state, finalOptions);
 
                 // Identify new symbols (Diffing)
                 const newKeys = Array.from(newState.stringMap.keys()).filter(k => !state.stringMap.has(k));
@@ -91,6 +92,7 @@ export class EtonDecoderStream extends TransformStream<string, Record<string, un
         const state = createState();
         let currentSchema: string[] = []; // Field names
         let isSymbolBlock = false;
+        let expectingSchemaFields = false;
 
         super({
             transform(chunk, controller) {
@@ -103,15 +105,17 @@ export class EtonDecoderStream extends TransformStream<string, Record<string, un
                     const trimmed = line.trim();
                     if (!trimmed) continue;
 
-                    // Schema Definition
+                    // Schema Definition Header
                     if (trimmed.startsWith("%Schema:")) {
-                        // Header line
                         isSymbolBlock = false;
+                        expectingSchemaFields = true;
                         continue;
                     }
-                    if (trimmed.startsWith("%Schema")) {
-                        // Default schema block start
-                        isSymbolBlock = false;
+
+                    // Schema Fields (The line immediately following %Schema:...)
+                    if (expectingSchemaFields) {
+                        currentSchema = decodeRow(trimmed);
+                        expectingSchemaFields = false;
                         continue;
                     }
 
@@ -124,6 +128,11 @@ export class EtonDecoderStream extends TransformStream<string, Record<string, un
                     // Dictionary Block - Force switch to Symbol mode
                     if (trimmed.startsWith("%Symbol")) {
                         isSymbolBlock = true;
+                        continue;
+                    }
+
+                    // Header line (Other % markers such as %SchemaName)
+                    if (trimmed.startsWith("%")) {
                         continue;
                     }
 

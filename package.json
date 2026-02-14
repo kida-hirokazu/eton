@@ -1,6 +1,6 @@
 {
   "name": "eton-ts",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.1",
   "description": "TypeScript implementation of ETON (Extended TOON Object Notation)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,6 +8,7 @@
     "build": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
+    "benchmark:reuse": "vite-node benchmarks/benchmark_reuse.ts",
     "lint": "biome check .",
     "lint:fix": "biome check --apply .",
     "format": "biome format --write ."
@@ -16,9 +17,12 @@
     "eton",
     "toon",
     "serialization",
-    "llm"
+    "llm",
+    "data-format",
+    "token-optimization",
+    "intelligence-protocol"
   ],
-  "author": "",
+  "author": "kida-hirokazu",
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",

@@ -1,28 +1,54 @@
 # ETON: Efficient Token-Oriented Notation
 
-> **"The Protocol for Intelligence."**
+> **"Is Stateless JSON really the final answer for AI communication?"**
 
-ETON is a **stateful data protocol designed to maximize communication efficiency with LLMs (Large Language Models)**.
-It clearly separates the "Meaning (TOML/TOON)" managed by humans from the "Representation (ETON)" used for communication, realizing an overwhelming reduction in token usage.
+ETON (Efficient Token-Oriented Notation) is an **experimental stateful data protocol designed to maximize the "Cognitive Throughput" of Large Language Models (LLMs)**.
+We propose a solution to the biggest bottleneck in current AI communication—**"Token Explosion"**—by clearly separating the "Meaning (TOML/TOON)" managed by humans from the "Representation (ETON)" processed by machines.
+
+## The Problem: Token Explosion
+
+Modern AI systems continuously re-transmit vast amounts of "context (dictionary information)" with every interaction.
+This is as inefficient as **"reading the entire dictionary aloud at the start of every phone call."**
+ETON solves this waste through **"Statefulness"**.
+
+## Competitive Analysis
+
+Why do we need a new format? Here is ETON's positioning compared to existing technologies.
+
+| Feature | **ETON** (Proposed) | JSON (Standard) | Protobuf / MsgPack | TOON (Human) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Primary Goal** | **Token Efficiency for LLM** | Data Interchange | Binary Size / Speed | Human Readability |
+| **Format** | Text (CSV/JSON Hybrid) | Text | Binary | Text (YAML-like) |
+| **LLM Readable?** | ✅ (Designed for it) | ✅ (Native) | ❌ (Need decoding) | ✅ (Excellent) |
+| **Stateful?** | **Yes** (Dictionary) | No | No | No |
+| **Compression** | **High** (Symbolized) | Low | High | Low |
+
+*   **vs JSON**: JSON is too verbose. ETON eliminates "key repetition" through dictionary separation.
+*   **vs Protobuf**: Binary formats are difficult for LLMs to understand directly (via tokenizer). ETON is **text-based**, allowing LLMs to "read and write" it directly.
+*   **vs TOON**: TOON is a format for "humans to write". ETON is the compiled result for "machines to read".
+
+---
 
 ## Why ETON?
 
 In massive communication with LLMs, token count is **cost itself**.
 
-### Benchmarks (Verified with `@toon-format/toon`)
+### Benchmarks (vs Minified JSON)
 
-| Data Type | JSON (Minified) | TOON (Readable) | **ETON (Efficient)** | ETON Reduction |
+| Data Type | JSON (Baseline) | Pure ETON (CSV) | **Hybrid ETON (JSON)** | ETON Reduction |
 | :--- | :--- | :--- | :--- | :--- |
-| **Tabular** (100 recs) | ~3,900 tokens | ~5,300 tokens¹ | **~2,400 tokens** | **-37%** |
-| **Nested** (50 recs) | ~6,700 tokens | ~10,100 tokens¹ | **~6,300 tokens** | **-6%** |
-| **High Repetition** | ~21,000 tokens | ~14,000 tokens | **~7,100 tokens** | **-66%** |
+| **Tabular** (List of Objects) | ~3,900 tokens | **~2,400 tokens** | ~3,500 tokens | **-37%** (Pure) |
+| **Nested** (Complex Graph) | ~6,700 tokens | ~7,100 tokens | **~4,400 tokens** | **-35%** (Hybrid) |
+| **Large Logs** (Repetitive) | ~127,700 tokens | ~153,000 tokens | **~84,400 tokens** | **-33%** (Hybrid) |
+| **High Redundancy** | ~2,300 tokens | **~1,500 tokens** | ~2,100 tokens | **-35%** (Pure) |
 
-*   **TOON** prioritizes human readability, including indentation and newlines.¹
-*   **ETON** prioritizes machine efficiency, utilizing dictionary compression.
+*   **Pure ETON**: Maximum efficiency for flat structures (Tabular) and highly redundant data.
+*   **Hybrid ETON**: Consistently outperforms JSON for complex nested structures and large log data.
+*   **TOON**: While larger than Minified JSON due to readability priority, it remains easily understandable for humans.
 
-> ¹ *TOON values include standard formatting for readability. ETON compares against Minified JSON for efficiency.*
+> **Note:** By choosing between `Pure` (CSV Dictionary) and `Hybrid` (JSON Dictionary) depending on the data structure, optimization is possible in all scenarios.
 
-[Detailed Benchmarks](./benchmarks/threshold.ts)
+[Detailed Benchmark Report](./docs/Benchmark_Report.md)
 *
 
 ETON demonstrates its true value in RAG pipelines and multi-agent communication through its stateful design: "Once the dictionary is passed, subsequent tokens are minimal."
@@ -57,17 +83,19 @@ pnpm install
 ## Basic Usage (Object -> ETON)
 
 ```typescript
-import { encodeBatch, createState } from './src/encoder';
+import { dumps } from './src/index';
 
 const data = [{ id: 1, name: "Alice", role: "Admin" }];
 const schemas = { "User": ["id", "name", "role"] };
-let state = createState();
 
-const [encoded, newState] = encodeBatch(data, "User", schemas, state);
-console.log(encoded);
-// Output:
+// 'dumps' automatically selects the optimal format (CSV or JSON)
+const eton = dumps(data, "User", schemas);
+
+console.log(eton);
+// Example Output:
 // %User
 // 1,@1,@2
+// ... (Dictionary)
 ```
 
 ## Streaming (Encoder Stream)
@@ -101,8 +129,13 @@ Provides **concrete examples** of actual ETON format data.
 
 #### [3. Format Comparison](./docs/Format_Comparison.md)
 Guidelines for **feature comparison** and **differentiation** from JSON and TOON.
+- **Auto-Detection**: Automatically analyzes data structures and selects the optimal format ([Details](docs/Feature_Auto_Detection.md)).
+- **Hybrid Dictionary**: Switches between CSV token efficiency and JSON expressiveness as needed.
 - Comparison table of token efficiency, readability, and design philosophy
 - Technical rationale for "Why use ETON?"
+
+#### [4. Auto-Detect Dictionary Format](./docs/Feature_Auto_Detection.md)
+Explains the feature that automatically selects the optimal dictionary format (CSV/JSON) based on data content.
 
 ---
 

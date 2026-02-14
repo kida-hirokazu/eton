@@ -18,8 +18,8 @@ sku = 284758393
 
         // Check ETON structure
         expect(eton).toContain("%products");
-        expect(eton).toContain('"Hammer"');
-        expect(eton).toContain('"Nail"');
+        expect(eton).toContain('Hammer');
+        expect(eton).toContain('Nail');
 
         // Check Schemas
         expect(schemas["products"]).toBeDefined();
@@ -53,7 +53,7 @@ id = 1
         expect(eton).toContain("%users");
 
         // Check order/presence
-        expect(eton).toContain('"192.168.1.1"');
-        expect(eton).toContain('"Alice"');
+        expect(eton).toContain('192.168.1.1');
+        expect(eton).toContain('Alice');
     });
 });
