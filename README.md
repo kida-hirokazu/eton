@@ -9,19 +9,21 @@ ETON は、**LLM（大規模言語モデル）との通信効率を極限まで�
 
 LLMとの大量通信において、トークン数は**コストそのもの**です。
 
-### ベンチマーク
-| データ種別 | JSON (Minified) | TOON (可読性重視) | **ETON (高効率)** | ETON削減率 |
+### ベンチマーク (vs Minified JSON)
+| データ種別 | JSON (Baseline) | Pure ETON (CSV) | **Hybrid ETON (JSON)** | ETON削減率 |
 | :--- | :--- | :--- | :--- | :--- |
-| **Tabular** (100 recs) | ~3,900 tokens | ~5,300 tokens¹ | **~2,400 tokens** | **-37%** |
-| **Nested** (50 recs) | ~6,700 tokens | ~10,100 tokens¹ | **~6,300 tokens** | **-6%** |
-| **High Repetition** | ~21,000 tokens | ~14,000 tokens | **~7,100 tokens** | **-66%** |
+| **Tabular** (List of Objects) | ~3,900 tokens | **~2,400 tokens** | ~3,500 tokens | **-37%** (Pure) |
+| **Nested** (Complex Graph) | ~6,700 tokens | ~7,100 tokens | **~4,400 tokens** | **-35%** (Hybrid) |
+| **Large Logs** (Repetitive) | ~127,700 tokens | ~153,000 tokens | **~84,400 tokens** | **-33%** (Hybrid) |
+| **High Redundancy** | ~2,300 tokens | **~1,500 tokens** | ~2,100 tokens | **-35%** (Pure) |
 
-*   **TOON** は、インデントや改行を含む可読性を重視したフォーマットです。¹
-*   **ETON** は、辞書圧縮を活用した機械効率を最優先するフォーマットです。
+*   **Pure ETON**: フラットな構造（Tabular）や非常に冗長性の高いデータで最強の効率を発揮。
+*   **Hybrid ETON**: 複雑なネスト構造や大規模ログデータにおいて、安定して JSON を凌駕。
+*   **TOON**: 可読性重視のため、Minified JSON と比較するとサイズは大きくなりますが、人間にとっての理解しやすさは維持されます。
 
-> ¹ *TOON の値は可読性のための標準的なフォーマットを含みます。ETON は圧縮効率の比較のため、Minified JSON と比較しています。*
+> **Note:** データ構造に応じて `Pure` (CSV辞書) と `Hybrid` (JSON辞書) を使い分けることで、あらゆるシナリオで最適化が可能です。
 
-[詳細なベンチマーク結果](./benchmarks/threshold.ts)
+[詳細なベンチマークレポート](./docs/Benchmark_Report.md)
 
 ETONは「辞書を一度渡せば、以降は極小のトークンで済む」ステートフルな設計により、RAGパイプラインやマルチエージェント通信で真価を発揮します。
 
@@ -101,6 +103,9 @@ ETON フォーマットの**公式な定義**と**プロトコル仕様**です�
 JSON や TOON との**特性比較**と**使い分け**のガイドラインです。
 - トークン効率、可読性、設計思想の比較表
 - 「なぜ ETON を使うのか？」の技術的根拠
+
+#### [4. 自動辞書判別機能 (Auto-Detect)](./docs/Feature_Auto_Detection.md)
+データの内容に応じて、最適な辞書形式（CSV/JSON）を自動選択する機能について解説します。
 
 ---
 
