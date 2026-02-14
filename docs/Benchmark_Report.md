@@ -31,9 +31,8 @@ The following data was collected on 2026-02-14 from the ETON bench suite.
 ### Performance Visualization (Token Reduction %)
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'xyChart': { 'plotColorPalette': 'brand' }}}}%%
 xychart-beta
-    title "Token Reduction Rate (Higher is Better)"
+    title "Reduction % (Bar: Pure, Line: Hybrid)"
     x-axis [Tabular, Nested, Logs, GitHub]
     y-axis "Reduction %" -20 --> 40
     bar [37, -6, -20, 24]
@@ -42,7 +41,7 @@ xychart-beta
 > **Legend**: Bar = Pure ETON, Line = Hybrid ETON.
 > *Notice how Hybrid recovers the negative performance in "Nested" and "Logs".*
 
-## ⚠️ The "Dictionary Tax" (Negative Results Analysis)
+## The "Dictionary Tax" (Negative Results Analysis)
 
 We must be honest: **ETON is not a magic bullet.** There are scenarios where ETON performs *worse* than standard JSON, resulting in a negative compression rate (inflation).
 
@@ -70,38 +69,29 @@ ETON shines when:
 *   The values are repeated (Logs, Analytics).
 *   The context is maintained (Chat history, Agents).
 
-### 3. One-off Messages
-ETON is designed for **Sessions** and **Context**.
-If you are sending a single, short message ("Hello world") and never communicating again, **JSON is better**.
-ETON shines when:
-*   The schema is reused (Batch processing).
-*   The values are repeated (Logs, Analytics).
-*   The context is maintained (Chat history, Agents).
-
 ## Scenario: Long-Running Session (Dictionary Reuse)
 
 The true power of ETON lies in **Dictionary Reuse**.
 In a chatbot or agent scenario where the schema is fixed, you only need to send the Dictionary once. Subsequent messages only contain the encoded body.
 
-### Simulation: `efficiency_event-logs.json` (100 records/msg)
+### Simulation: `efficiency_event-logs.json` (Per Log Record)
 
 | Metric | JSON (Stateless) | ETON (Reuse) |
 | :--- | :--- | :--- |
-| **Initial Cost** | 44,795 tokens | **51,129 tokens** (Body + Dict) |
-| **Running Cost** | 44,795 tokens | **29,737 tokens** (Body Only) |
-| **Saving per Message** | 0 tokens | **-15,058 tokens (-33%)** |
+| **Initial Cost** | 46 tokens | **3,044 tokens** (Body + Dict) |
+| **Running Cost** | 46 tokens | **13 tokens** (Body Only) |
+| **Saving per Message** | 0 tokens | **33 tokens (71.7%)** |
 
-> **Break-Even Point**: **2 Messages**.
-> *From the 2nd message onwards, ETON is cheaper. By the 100th message, ETON saves ~1.5 million tokens.*
+> **Break-Even Point**: **92 records**.
+> *Once the dictionary is cached, each log entry is pulverized from 46 tokens down to just 13 tokens.*
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'xyChart': { 'plotColorPalette': 'brand' }}}}%%
 xychart-beta
-    title "Cumulative Tokens (Lower is Better)"
-    x-axis [1, 10, 50, 100]
-    y-axis "Total Tokens" 0 --> 4500000
-    line [44795, 447950, 2239750, 4479500]
-    line [51129, 318762, 1508242, 2995092]
+    title "Cumulative Tokens (Top: JSON, Bottom: ETON Reuse)"
+    x-axis [1, 100, 500, 1000]
+    y-axis "Total Tokens" 0 --> 50000
+    line [46, 4600, 23000, 46000]
+    line [3044, 4331, 9531, 16031]
 ```
 > **Legend**: Top Line = JSON, Bottom Line = ETON (Reuse).
 
