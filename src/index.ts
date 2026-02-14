@@ -13,10 +13,10 @@ export * from "./csv"; // Exporting low-level utils might be useful
 import { encodeBatch, type EncodeOptions } from "./encoder";
 import { debugDecode, type DecodedRecord } from "./decoder";
 import { createState, type SymbolState, resolveSymbol, serializeDictionary, serializeDictionaryJson, parseDictionary } from "./symbols";
-import { type SchemaMap } from "./schema";
+import { type SchemaMap, inferSchema } from "./schema";
 import { EtonEncoderStream, EtonDecoderStream } from "./stream";
 
-export { serializeDictionary, serializeDictionaryJson, parseDictionary, EtonEncoderStream, EtonDecoderStream };
+export { serializeDictionary, serializeDictionaryJson, parseDictionary, EtonEncoderStream, EtonDecoderStream, inferSchema };
 
 /**
  * High-level API: Dump records to ETON string.

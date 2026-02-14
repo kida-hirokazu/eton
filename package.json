@@ -1,6 +1,6 @@
 {
   "name": "eton-ts",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.1",
   "description": "TypeScript implementation of ETON (Extended TOON Object Notation)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,6 +22,7 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
+    "@toon-format/toon": "^2.1.0",
     "@types/iarna__toml": "^2.0.5",
     "@types/node": "^20.11.19",
     "gpt-tokenizer": "^3.4.0",

@@ -39,3 +39,41 @@ export function normalizeSchema(schemaInput: unknown): SchemaMap {
     }
     return schemaInput as SchemaMap;
 }
+
+/**
+ * Recursively infer schema from a list of records.
+ * This handles nested objects by creating sub-schemas, which significantly improves
+ * compression by avoiding JSON stringification of nested structures.
+ */
+export function inferSchema(records: Record<string, unknown>[], rootId: string = "Root"): SchemaMap {
+    const schemas: SchemaMap = {};
+    deepInferSchema(records, schemas, rootId);
+    return schemas;
+}
+
+function deepInferSchema(records: any[], schemaMap: Record<string, string[]>, rootId: string) {
+    if (records.length === 0) return;
+
+    // 1. Infer fields for the current level
+    const first = records[0];
+    if (typeof first !== "object" || first === null) return;
+
+    const fields = Object.keys(first);
+    schemaMap[rootId] = fields;
+
+    // 2. Recurse into object fields
+    for (const field of fields) {
+        const value = first[field];
+        if (Array.isArray(value)) {
+            // Array of objects?
+            if (value.length > 0 && typeof value[0] === "object" && value[0] !== null) {
+                deepInferSchema(value, schemaMap, field); // Use field name as schema ID
+            }
+        }
+        /* 
+        // Future: Support single nested object schema if ETON core supports it.
+        // Currently ETON handles arrays of objects via relation schemas well.
+        // Single objects are often treated as JSON strings unless we add specific handling in encoder.
+        */
+    }
+}

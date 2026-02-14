@@ -21,6 +21,9 @@ importers:
       '@biomejs/biome':
         specifier: ^1.5.3
         version: 1.9.4
+      '@toon-format/toon':
+        specifier: ^2.1.0
+        version: 2.1.0
       '@types/iarna__toml':
         specifier: ^2.0.5
         version: 2.0.5
@@ -526,6 +529,9 @@ packages:
 
   '@sinclair/typebox@0.27.10':
     resolution: {integrity: sha512-MTBk/3jGLNB2tVxv6uLlFh1iu64iYOQ2PbdOSK3NW8JZsmlaOh2q6sdtKowBhfw8QFLmYNzTW4/oK4uATIi6ZA==}
+
+  '@toon-format/toon@2.1.0':
+    resolution: {integrity: sha512-JwWptdF5eOA0HaQxbKAzkpQtR4wSWTEfDlEy/y3/4okmOAX1qwnpLZMmtEWr+ncAhTTY1raCKH0kteHhSXnQqg==}
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
@@ -1202,6 +1208,8 @@ snapshots:
     optional: true
 
   '@sinclair/typebox@0.27.10': {}
+
+  '@toon-format/toon@2.1.0': {}
 
   '@types/estree@1.0.8': {}
 

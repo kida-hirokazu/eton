@@ -5,42 +5,31 @@
 ETON は、**LLM（大規模言語モデル）との通信効率を極限まで高めるために設計された、ステートフルなデータプロトコル**です。
 人間が管理する「意味 (TOML/TOON)」と、通信のための「表現 (ETON)」を明確に分離し、圧倒的なトークン削減を実現します。
 
-## 📁 プロジェクト構成
+## なぜ ETON なのか？
 
-## 📦 インストール
+LLMとの大量通信において、トークン数は**コストそのもの**です。
 
-```bash
-pnpm install
-```
+### ベンチマーク
+| データ種別 | JSON (Minified) | TOON (可読性重視) | **ETON (高効率)** | ETON削減率 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Tabular** (100 recs) | ~3,900 tokens | ~5,300 tokens¹ | **~2,400 tokens** | **-37%** |
+| **Nested** (50 recs) | ~6,700 tokens | ~10,100 tokens¹ | **~6,300 tokens** | **-6%** |
+| **High Repetition** | ~21,000 tokens | ~14,000 tokens | **~7,100 tokens** | **-66%** |
 
-## 🛠 基本的な使い方 (Object -> ETON)
+*   **TOON** は、インデントや改行を含む可読性を重視したフォーマットです。¹
+*   **ETON** は、辞書圧縮を活用した機械効率を最優先するフォーマットです。
 
-```typescript
-import { encodeBatch, createState } from './src/encoder';
+> ¹ *TOON の値は可読性のための標準的なフォーマットを含みます。ETON は圧縮効率の比較のため、Minified JSON と比較しています。*
 
-const data = [{ id: 1, name: "Alice", role: "Admin" }];
-const schemas = { "User": ["id", "name", "role"] };
-let state = createState();
+[詳細なベンチマーク結果](./benchmarks/threshold.ts)
 
-const [encoded, newState] = encodeBatch(data, "User", schemas, state);
-console.log(encoded);
-// 出力例: @1,@2,@3
-```
+ETONは「辞書を一度渡せば、以降は極小のトークンで済む」ステートフルな設計により、RAGパイプラインやマルチエージェント通信で真価を発揮します。
 
-## 🛠 ストリーミング (Encoder Stream)
+---
 
-```typescript
-import { EtonEncoderStream } from './src/stream';
+## アーキテクチャ: Bridge & Compiler
 
-const encoder = new EtonEncoderStream("User", { "User": ["id", "name", "role"] });
-const writer = encoder.writable.getWriter();
-
-writer.write({ id: 1, name: "Alice", role: "Admin" });
-```
-
-## 🏗 アーキテクチャ
-
-ETON は **「意味」と「データ」を分離** します。
+ETON は単なるデータ形式ではなく、LLM 通信のための **「コンパイル型プロトコル」** です。
 
 ```mermaid
 graph LR
@@ -51,37 +40,116 @@ graph LR
     D --> E
 ```
 
-- **Dictionary**: 頻出文字列の実体を管理。
-- **Data**: シンボル化された軽量なレコード行。
-
-これにより、LLM に対しては「辞書を一度システムプロンプト等で与えれば、以降は極小のトークンでデータを送信し続ける」という運用が可能になります。
-
-## 📊 ドキュメント (Documents)
-
-### 🌐 公開用 (Public)
-- **[技術仕様書](./docs/ETON_Specification.md)**: フォーマットの定義、規則、データ型。
-- **[ETON 形式サンプル](./docs/ETON_Sample.md)**: 実際のデータ記述例。
-- **[フォーマット比較](./docs/Format_Comparison.md)**: JSON/TOON との使い分け。
-
-### 🧠 開発・内部資料
-*詳細な設計思想、ベンチマークデータ、戦略については内部ドキュメントを参照してください。*
+1.  **Source (TOML/TOON)**: 人間が編集・管理するマスターデータ。
+2.  **Bridge / Compiler**: ソースを解析し、「辞書 (Dictionary)」と「データ本体 (ETON)」に分離。
+3.  **Protocol (ETON)**: LLM への入力専用。極小トークンで高密度な情報を転送。
 
 ---
 
-## ⚠️ 開発ステータスと警告
+## インストール
+
+```bash
+pnpm install
+```
+
+## 基本的な使い方 (Object -> ETON)
+
+```typescript
+import { encodeBatch, createState } from './src/encoder';
+
+const data = [{ id: 1, name: "Alice", role: "Admin" }];
+const schemas = { "User": ["id", "name", "role"] };
+let state = createState();
+
+const [encoded, newState] = encodeBatch(data, "User", schemas, state);
+console.log(encoded);
+// 出力:
+// %User
+// 1,@1,@2
+```
+
+## ストリーミング (Encoder Stream)
+
+```typescript
+import { EtonEncoderStream } from './src/stream';
+
+const encoder = new EtonEncoderStream("User", { "User": ["id", "name", "role"] });
+const writer = encoder.writable.getWriter();
+
+writer.write({ id: 1, name: "Alice", role: "Admin" });
+// ストリームから %Schema, %Symbol, %Data, そしてデータ行が順次出力されます
+```
+
+---
+
+## ドキュメント (Documents)
+
+### 主要ドキュメント
+
+#### [1. 技術仕様書 (Specification)](./docs/ETON_Specification.md)
+ETON フォーマットの**公式な定義**と**プロトコル仕様**です。
+- データ構造（Schema, Symbol, Data, Audit）の詳細定義
+- 型システムとエンコーディングルール
+- ストリーミング通信の仕様
+
+#### [2. データ記述サンプル (Sample)](./docs/ETON_Sample.md)
+実際の ETON 形式の**具体例**を示します。
+- ユーザープロファイル、注文情報などのユースケース別の記述例
+- スキーマ定義とデータ行の対応関係
+
+#### [3. フォーマット比較 (Comparison)](./docs/Format_Comparison.md)
+JSON や TOON との**特性比較**と**使い分け**のガイドラインです。
+- トークン効率、可読性、設計思想の比較表
+- 「なぜ ETON を使うのか？」の技術的根拠
+
+---
+
+## 使うべき場面・使うべきでない場面
+
+### ETONが最適
+- [x] 高スループットなエージェントシステム
+- [x] RAGパイプライン
+- [x] ログ圧縮
+
+### ETONは不適切
+- [ ] ワンショットAPIコール
+- [ ] 人間が編集する設定ファイル
+- [ ] 小規模データセット
+
+---
+
+## FAQ
+
+**Q: LLMの解釈精度は？**  
+A: GPT-5, Kimi 2.5, Haiku 4.5等での単回テストでは解釈可能であることを確認していますが、統計的保証はまだありません。本番投入前に必ずスモークテストを実施してください。
+
+**Q: なぜ辞書が必要？**  
+A: "Admin"を100回送るより、辞書で一度`@2="Admin"`と定義し、以降は`@2`と送る方が圧倒的に安価だからです。
+
+**Q: 本番で使える？**  
+A: 現在は Alpha 版です。小規模で試して、問題なければ段階的に拡大してください。
+
+---
+
+## 開発ステータス
 
 > [!WARNING]
-> ETONは現在 **Alpha** 段階です。
-> トークン節約効率については実証済みですが、LLM による解釈精度の統計的保証はまだありません。
-> 重要なプロジェクトに導入する際は、必ず自身のデータセットでスモークテストを実施してください。
+> ETON は現在 **Alpha** 段階です。
+>
+> - トークン削減効果は実証済み（**66%削減**）
+> - LLMの解釈精度は統計的に広範な検証がされていません
+> - 重要なプロジェクトでは、必ず自分のデータでテストしてください
 
 ---
 
-## ✨ コア・バリュー
+## Contributing
 
-1.  **Extreme Efficiency**: JSON 比 **~66%** のトークン削減。
-2.  **Stateful Optimization**: 共通の辞書を再利用することで、繰り返し通信のコストを最小化。
-3.  **Auditability**: `!AUDIT` 行による整合性チェック機能を標準装備。
+ETONは研究プロジェクトです。改善提案歓迎！
+
+**開発優先度:**
+- [ ] エラーハンドリング強化
+- [ ] パフォーマンス最適化（大規模データ）
+- [ ] エッジケーステストの拡充
 
 ---
 License: MIT

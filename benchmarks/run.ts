@@ -1,16 +1,11 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { encode, serializeDictionary, serializeDictionaryJson, type SchemaMap } from "../src/index";
+import { encode, serializeDictionary, serializeDictionaryJson, type SchemaMap, inferSchema } from "../src/index";
 import { encode as gptEncode } from "gpt-tokenizer";
+import { encode as toonEncode } from "@toon-format/toon";
 
-const DATA_DIR = path.resolve(__dirname, "../../data/toon_datasets");
+const DATA_DIR = path.resolve(__dirname, "../data/toon_datasets");
 const CO2_PER_1K_TOKENS = 0.001719; // kgCO2e
-
-function inferSchema(records: any[]): string[] {
-    if (records.length === 0) return [];
-    const first = records[0];
-    return Object.keys(first);
-}
 
 async function runBenchmarks() {
     if (!fs.existsSync(DATA_DIR)) {
@@ -57,8 +52,22 @@ async function runBenchmarks() {
         const jsonStr = JSON.stringify(records); // Baseline: compact JSON of records
         const jsonTokens = gptEncode(jsonStr).length;
 
-        const schemas: SchemaMap = {};
-        schemas[schemaId] = inferSchema(records);
+        const schemas = inferSchema(records, schemaId);
+
+        // 0. TOON (Real Library)
+        let toonReduction = "0%";
+        let toonEES = 0;
+        try {
+            const toonStr = toonEncode(records);
+            const toonTokens = gptEncode(toonStr).length;
+            toonReduction = ((1 - toonTokens / jsonTokens) * 100).toFixed(2) + "%";
+
+            const co2 = (toonTokens / 1000) * CO2_PER_1K_TOKENS;
+            const co2Json = (jsonTokens / 1000) * CO2_PER_1K_TOKENS;
+            toonEES = 1 - (co2 / co2Json);
+        } catch (e) {
+            // console.error(e);
+        }
 
         // 1. Pure ETON
         let pureReduction = "0%";
@@ -92,7 +101,7 @@ async function runBenchmarks() {
             hybridEES = 1 - (co2 / co2Json);
         } catch (e) { }
 
-        console.log(`| ${file} | ${jsonTokens.toLocaleString()} | ${pureReduction} | ${hybridReduction} | ${pureEES.toFixed(2)} | ${hybridEES.toFixed(2)} |`);
+        console.log(`| ${file} | ${jsonTokens.toLocaleString()} | ${toonReduction} | ${pureReduction} | ${hybridReduction} | ${pureEES.toFixed(2)} |`);
     }
 }
 

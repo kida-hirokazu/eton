@@ -22,8 +22,7 @@ export function encodeRow(row: string[]): string {
 
     const output = stringify([row], {
         record_delimiter: "unix", // \n
-        quoted_string: true,      // Quote strings if needed (default behavior is good, but let's be implicit)
-        // "quoted_match": ... could be used to force quotes for specific patterns
+        //quoted_string: true,      // DISABLE this! Let logic decide minimizing quotes.
     });
 
     // Remove trailing newline
