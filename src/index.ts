@@ -10,13 +10,13 @@ export * from "./encoder";
 export * from "./decoder";
 export * from "./csv"; // Exporting low-level utils might be useful
 
-import { encodeBatch, type EncodeOptions } from "./encoder";
+import { encodeBatch, detectRecommendedFormat, type EncodeOptions } from "./encoder";
 import { debugDecode, type DecodedRecord } from "./decoder";
 import { createState, type SymbolState, resolveSymbol, serializeDictionary, serializeDictionaryJson, parseDictionary } from "./symbols";
 import { type SchemaMap, inferSchema } from "./schema";
 import { EtonEncoderStream, EtonDecoderStream } from "./stream";
 
-export { serializeDictionary, serializeDictionaryJson, parseDictionary, EtonEncoderStream, EtonDecoderStream, inferSchema };
+export { serializeDictionary, serializeDictionaryJson, parseDictionary, EtonEncoderStream, EtonDecoderStream, inferSchema, detectRecommendedFormat };
 
 /**
  * High-level API: Dump records to ETON string.
@@ -28,8 +28,19 @@ export function dumps(
     state: SymbolState = createState(),
     options: EncodeOptions = {}
 ): string {
-    const [result, _] = encodeBatch(records, schemaId, schemas, state, options);
-    return result;
+    const [encoded, newState] = encodeBatch(records, schemaId, schemas, state, options);
+
+    // Determine dictionary format
+    let format = options.dictionaryFormat || "auto";
+    if (format === "auto") {
+        format = detectRecommendedFormat(records);
+    }
+
+    const dictStr = format === "json"
+        ? serializeDictionaryJson(newState)
+        : serializeDictionary(newState);
+
+    return encoded + "\n" + dictStr;
 }
 
 /**

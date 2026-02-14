@@ -10,9 +10,12 @@ import {
 } from "./symbols";
 import { type SchemaMap } from "./schema";
 
+export type DictionaryFormat = "csv" | "json" | "auto";
+
 export interface EncodeOptions {
     audit?: boolean;
     threshold?: number;
+    dictionaryFormat?: DictionaryFormat;
 }
 
 /**
@@ -108,4 +111,30 @@ export function encodeBatch(
     }
 
     return [lines.join("\n"), mutableTable.toState()];
+}
+
+/**
+ * Detects the recommended dictionary format based on data characteristics.
+ * Heuristic: If deep nesting or complex objects are prevalent ( > 20%), prefer JSON.
+ */
+export function detectRecommendedFormat(records: Record<string, unknown>[]): "csv" | "json" {
+    let nestedCount = 0;
+    // Check up to 50 records to avoid performance penalty
+    const limit = Math.min(records.length, 50);
+    if (limit === 0) return "csv";
+
+    for (let i = 0; i < limit; i++) {
+        const vals = Object.values(records[i]);
+        for (const v of vals) {
+            if (typeof v === "object" && v !== null) {
+                nestedCount++;
+            }
+        }
+    }
+
+    // Heuristic: If meaningful nesting exists in > 20% of fields, JSON is safer/efficient
+    const fieldCount = Object.keys(records[0] || {}).length;
+    if (fieldCount === 0) return "csv";
+
+    return (nestedCount / (limit * fieldCount)) > 0.2 ? "json" : "csv";
 }
