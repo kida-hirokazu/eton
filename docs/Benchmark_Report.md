@@ -70,6 +70,41 @@ ETON shines when:
 *   The values are repeated (Logs, Analytics).
 *   The context is maintained (Chat history, Agents).
 
+### 3. One-off Messages
+ETON is designed for **Sessions** and **Context**.
+If you are sending a single, short message ("Hello world") and never communicating again, **JSON is better**.
+ETON shines when:
+*   The schema is reused (Batch processing).
+*   The values are repeated (Logs, Analytics).
+*   The context is maintained (Chat history, Agents).
+
+## Scenario: Long-Running Session (Dictionary Reuse)
+
+The true power of ETON lies in **Dictionary Reuse**.
+In a chatbot or agent scenario where the schema is fixed, you only need to send the Dictionary once. Subsequent messages only contain the encoded body.
+
+### Simulation: `efficiency_event-logs.json` (100 records/msg)
+
+| Metric | JSON (Stateless) | ETON (Reuse) |
+| :--- | :--- | :--- |
+| **Initial Cost** | 44,795 tokens | **51,129 tokens** (Body + Dict) |
+| **Running Cost** | 44,795 tokens | **29,737 tokens** (Body Only) |
+| **Saving per Message** | 0 tokens | **-15,058 tokens (-33%)** |
+
+> **Break-Even Point**: **2 Messages**.
+> *From the 2nd message onwards, ETON is cheaper. By the 100th message, ETON saves ~1.5 million tokens.*
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'xyChart': { 'plotColorPalette': 'brand' }}}}%%
+xychart-beta
+    title "Cumulative Tokens (Lower is Better)"
+    x-axis [1, 10, 50, 100]
+    y-axis "Total Tokens" 0 --> 4500000
+    line [44795, 447950, 2239750, 4479500]
+    line [51129, 318762, 1508242, 2995092]
+```
+> **Legend**: Top Line = JSON, Bottom Line = ETON (Reuse).
+
 ## Key Insights
 
 1.  **Tabular Efficiency**: For datasets that are essentially lists of uniform objects (like `accuracy_tabular`), **Pure ETON** consistently achieves **35-37%** token savings compared to minified JSON.
