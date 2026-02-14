@@ -83,17 +83,19 @@ pnpm install
 ## Basic Usage (Object -> ETON)
 
 ```typescript
-import { encodeBatch, createState } from './src/encoder';
+import { dumps } from './src/index';
 
 const data = [{ id: 1, name: "Alice", role: "Admin" }];
 const schemas = { "User": ["id", "name", "role"] };
-let state = createState();
 
-const [encoded, newState] = encodeBatch(data, "User", schemas, state);
-console.log(encoded);
-// Output:
+// 'dumps' automatically selects the optimal format (CSV or JSON)
+const eton = dumps(data, "User", schemas);
+
+console.log(eton);
+// Example Output:
 // %User
 // 1,@1,@2
+// ... (Dictionary)
 ```
 
 ## Streaming (Encoder Stream)
@@ -127,6 +129,8 @@ Provides **concrete examples** of actual ETON format data.
 
 #### [3. Format Comparison](./docs/Format_Comparison.md)
 Guidelines for **feature comparison** and **differentiation** from JSON and TOON.
+- **Auto-Detection**: Automatically analyzes data structures and selects the optimal format ([Details](docs/Feature_Auto_Detection.md)).
+- **Hybrid Dictionary**: Switches between CSV token efficiency and JSON expressiveness as needed.
 - Comparison table of token efficiency, readability, and design philosophy
 - Technical rationale for "Why use ETON?"
 

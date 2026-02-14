@@ -76,6 +76,13 @@ export class MutableSymbolTable {
             return this.sMap.get(s)!;
         }
 
+        // Only symbolize if string is long enough or repeated? 
+        // Actually, if it's already in the map, we use it. 
+        // If not, we only add it if it's long enough.
+        if (s.length < threshold) {
+            return s;
+        }
+
         // Create new symbol
         const symbol = `@${this.nextId}`;
         this.sMap.set(s, symbol);
@@ -111,6 +118,10 @@ export function getSymbol(
     const s = String(value);
     if (state.stringMap.has(s)) {
         return [state.stringMap.get(s)!, state];
+    }
+
+    if (s.length < threshold) {
+        return [s, state];
     }
 
     // Create new state (Immutable update)

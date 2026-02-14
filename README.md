@@ -21,6 +21,8 @@ ETONは、この無駄を「状態保持（Stateful）」によって解決し�
 | **Format** | Text (CSV/JSON Hybrid) | Text | Binary | Text (YAML-like) |
 | **LLM Readable?** | ✅ (Designed for it) | ✅ (Native) | ❌ (Need decoding) | ✅ (Excellent) |
 | **Stateful?** | **Yes** (Dictionary) | No | No | No |
+| **Auto-Detection** | ✅ (Optimal format selection) | ❌ | ❌ | ❌ |
+| **Hybrid Dictionary** | ✅ (CSV/JSON switching) | ❌ | ❌ | ❌ |
 | **Compression** | **High** (Symbolized) | Low | High | Low |
 
 *   **vs JSON**: JSONは冗長すぎます。ETONは辞書分離により、JSONの「キーの繰り返し」を排除します。
@@ -81,17 +83,19 @@ pnpm install
 ## 基本的な使い方 (Object -> ETON)
 
 ```typescript
-import { encodeBatch, createState } from './src/encoder';
+import { dumps } from './src/index';
 
 const data = [{ id: 1, name: "Alice", role: "Admin" }];
 const schemas = { "User": ["id", "name", "role"] };
-let state = createState();
 
-const [encoded, newState] = encodeBatch(data, "User", schemas, state);
-console.log(encoded);
-// 出力:
+// dumps は自動的に最適な辞書形式 (CSV/JSON) を選択します
+const eton = dumps(data, "User", schemas);
+
+console.log(eton);
+// 出力例:
 // %User
 // 1,@1,@2
+// ... (Dictionary)
 ```
 
 ## ストリーミング (Encoder Stream)

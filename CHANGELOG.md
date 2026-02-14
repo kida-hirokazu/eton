@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.1.1] - 2026-02-15
+
+### Added
+- **Auto-Detect Dictionary Format**: Introduced `detectRecommendedFormat` and high-level `dumps` API for automatic optimal format selection.
+- **Dictionary Reuse Benchmark**: New benchmark scenario for stateful sessions (`pnpm benchmark:reuse`).
+- **Research Proposal Orientation**: Reframed documentation to position ETON as an "Intelligence Protocol" for LLM communication.
+- **Qualitative Analysis**: Integrated LLM interpretability test results into the benchmark report.
+- **Documentation**: Added `docs/Feature_Auto_Detection.md`.
+
+### Changed
+- Promoted `dumps` as the primary entrance API in README.
+- Cleaned up Mermaid charts in `docs/Benchmark_Report.md` for better rendering and clarity.
+- Updated package author to `kida-hirokazu`.
+
 ## [0.1.0-alpha.1] - 2026-02-14
 
 ### Added

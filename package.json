@@ -1,6 +1,6 @@
 {
   "name": "eton-ts",
-  "version": "0.1.1-alpha.1",
+  "version": "0.1.1",
   "description": "TypeScript implementation of ETON (Extended TOON Object Notation)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,9 +17,12 @@
     "eton",
     "toon",
     "serialization",
-    "llm"
+    "llm",
+    "data-format",
+    "token-optimization",
+    "intelligence-protocol"
   ],
-  "author": "",
+  "author": "kida-hirokazu",
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",

@@ -101,6 +101,29 @@ xychart-beta
 2.  **Hybrid for Complexity**: For deeply nested or irregular structures (`accuracy_nested`, `efficiency_nested`), the **Hybrid ETON** format is superior, reaching up to **40%** savings.
 3.  **The "Dictionary Tax"**: On small datasets with low repetition (like `accuracy_event-logs`), the overhead of defining the schema and symbols (the ETON Dictionary) can exceed the savings, leading to negative CRR. ETON is best used for **high-throughput** or **repeated sessions** where the dictionary is sent once.
 
+## Qualitative Analysis: LLM Interpretability
+
+Token efficiency is irrelevant if the model cannot understand the compressed data. We conducted single-shot interpretability tests across major LLMs.
+
+### Interpretation Results
+
+| Model | Dataset | Input Format | Correct Interpretation? |
+|:---|:---|:---|:---|
+| **GPT-5** | Tabular | ETON | ✅ Yes (verified) |
+| **Haiku 4.5** | Nested | ETON | ✅ Yes |
+| **Kimi 2.5** | GitHub | ETON | ✅ Yes |
+| **Llama 3.3** | Event logs | ETON | ❓ Not tested yet |
+
+**Methodology:**
+1.  **Context Injection**: Send both the ETON Dictionary and the encoded payload.
+2.  **Extraction Task**: Ask specifically: *"Extract the name of the first user"* (or equivalent key data point).
+3.  **Validation**: Compare the model's response with the original JSON ground truth.
+
+**Current Limitations:**
+- **Sample Size**: These are single-shot manual tests (N=1 per model).
+- **Reasoning**: Only basic extraction was tested, not complex logic over compressed sets.
+- **Scale**: We are seeking community data to validate interpretability at scale.
+
 ## CO2 & Cost Impact (Estimated)
 
 Based on a standard factor of **$0.001719 \text{ kgCO2e} / 1k \text{ tokens}$**:
