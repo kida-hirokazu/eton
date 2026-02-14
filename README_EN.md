@@ -76,9 +76,23 @@ graph LR
 
 ## Installation
 
+Currently, this project is in the development phase. Please set it up from the source code.
+
 ```bash
+# Clone the repository
+git clone https://github.com/kida-hirokazu/eton.git
+cd eton
+
+# Install dependencies
 pnpm install
+
+# Build (if needed)
+pnpm build
 ```
+
+**Prerequisites:**
+- Node.js 22+
+- pnpm (recommended)
 
 ## Basic Usage (Object -> ETON)
 
