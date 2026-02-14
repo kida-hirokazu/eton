@@ -76,9 +76,23 @@ graph LR
 
 ## インストール
 
+現在、本プロジェクトは開発フェーズにあります。ソースコードからセットアップして利用・開発を行ってください。
+
 ```bash
+# レポジトリのクローン
+git clone https://github.com/kida-hirokazu/eton.git
+cd eton
+
+# 依存関係のインストール
 pnpm install
+
+# ビルド (必要に応じて)
+pnpm build
 ```
+
+**前提条件:**
+- Node.js 22 以上
+- pnpm (推奨)
 
 ## 基本的な使い方 (Object -> ETON)
 
