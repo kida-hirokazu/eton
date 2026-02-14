@@ -3,6 +3,16 @@
 Thank you for your interest in contributing to ETON!
 We are currently in the **Alpha** stage of development. While we welcome feedback and contributions, please be aware that the specification and API may change at any time.
 
+## How to Help (Research Phase)
+
+This project is not just software; it is a **proposal for a new communication standard**. We need your help to prove its viability:
+
+1.  **Provide Real-World Data**: We need diverse datasets to test our compression efficiency. If you have anonymized logs or large JSON files, please share them or run our benchmarks against them.
+2.  **Edge Case Reporting**: "Does ETON break with this weird Unicode character?" — Yes, we want to know that.
+3.  **Wrapper Implementation**: Python, Rust, Go... We need implementations in other languages to prove the protocol's portability.
+
+---
+
 ## Getting Started
 
 1.  **Fork & Clone**: Fork this repository and clone it to your local machine.

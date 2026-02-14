@@ -1,9 +1,33 @@
 # ETON: Efficient Token-Oriented Notation
 
-> **"The Protocol for Intelligence."**
+> **"Is Stateless JSON really the final answer for AI communication?"**
 
-ETON は、**LLM（大規模言語モデル）との通信効率を極限まで高めるために設計された、ステートフルなデータプロトコル**です。
-人間が管理する「意味 (TOML/TOON)」と、通信のための「表現 (ETON)」を明確に分離し、圧倒的なトークン削減を実現します。
+ETON (Efficient Token-Oriented Notation) は、**LLM（大規模言語モデル）の「認知的スループット」を最大化するために設計された、実験的なステートフル・プロトコル**です。
+私たちは、人間が管理する「意味 (TOML/TOON)」と、機械が処理する「表現 (ETON)」を明確に分離することで、現在のAI通信における最大のボトルネック——**「トークン爆発」**——の解決を提案します。
+
+## The Problem: Token Explosion
+
+現代のAIシステムは、対話のたびに膨大な「コンテキスト（辞書情報）」を再送信し続けています。
+これは、**「毎回の電話で、辞書を最初から朗読し直している」** のと同じくらい非効率です。
+ETONは、この無駄を「状態保持（Stateful）」によって解決します。
+
+## Competitive Analysis
+
+なぜ新しいフォーマットが必要なのか？既存の技術と比較した ETON の立ち位置は以下の通りです。
+
+| Feature | **ETON** (Proposed) | JSON (Standard) | Protobuf / MsgPack | TOON (Human) |
+| :--- | :--- | :--- | :--- | :--- |
+| **Primary Goal** | **Token Efficiency for LLM** | Data Interchange | Binary Size / Speed | Human Readability |
+| **Format** | Text (CSV/JSON Hybrid) | Text | Binary | Text (YAML-like) |
+| **LLM Readable?** | ✅ (Designed for it) | ✅ (Native) | ❌ (Need decoding) | ✅ (Excellent) |
+| **Stateful?** | **Yes** (Dictionary) | No | No | No |
+| **Compression** | **High** (Symbolized) | Low | High | Low |
+
+*   **vs JSON**: JSONは冗長すぎます。ETONは辞書分離により、JSONの「キーの繰り返し」を排除します。
+*   **vs Protobuf**: バイナリ形式はLLMが（トークナイザ経由で）直接理解するのが困難です。ETONは**テキストベース**であるため、LLMが直接「読み書き」可能です。
+*   **vs TOON**: TOONは「人間が書く」ためのフォーマットです。ETONはそれを「機械が読む」ためにコンパイルした結果です。
+
+---
 
 ## なぜ ETON なのか？
 
