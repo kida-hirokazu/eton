@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { tomlToEton } from "../src/bridge/toml";
+import { tomlToEton as publicTomlToEton } from "../src/index";
 import { debugLoads } from "../src/index";
 
 describe("TOML Bridge", () => {
@@ -55,5 +56,62 @@ id = 1
         // Check order/presence
         expect(eton).toContain('192.168.1.1');
         expect(eton).toContain('Alice');
+    });
+
+    it("should work via public API export", () => {
+        const tomlStr = `
+[[users]]
+id = 1
+name = "Alice"
+role = "Admin"
+
+[[users]]
+id = 2
+name = "Bob"
+role = "User"
+`;
+
+        const { eton, schemas, state } = publicTomlToEton(tomlStr);
+
+        // Verify basic structure
+        expect(eton).toContain("%users");
+        expect(schemas["users"]).toEqual(["id", "name", "role"]);
+
+        // Verify state is returned (even if empty due to threshold)
+        expect(state).toBeDefined();
+        expect(state.stringMap).toBeDefined();
+
+        // Verify data presence
+        expect(eton).toContain("Alice");
+        expect(eton).toContain("Bob");
+
+        // Verify decode works
+        const decoded = debugLoads(eton);
+        expect(decoded.length).toBeGreaterThan(0);
+    });
+
+    it("should handle TOML with various data types", () => {
+        const tomlStr = `
+[[config]]
+environment = "production"
+debug = false
+max_connections = 100
+timeout = 30.5
+`;
+
+        const { eton, schemas } = publicTomlToEton(tomlStr);
+
+        expect(schemas["config"]).toEqual([
+            "environment",
+            "debug",
+            "max_connections",
+            "timeout"
+        ]);
+
+        // Verify all values are encoded
+        expect(eton).toContain("production");
+        expect(eton).toContain("F"); // false -> F
+        expect(eton).toContain("100");
+        expect(eton).toContain("30.5");
     });
 });

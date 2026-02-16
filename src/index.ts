@@ -15,8 +15,10 @@ import { debugDecode, type DecodedRecord } from "./decoder";
 import { createState, type SymbolState, resolveSymbol, serializeDictionary, serializeDictionaryJson, parseDictionary } from "./symbols";
 import { type SchemaMap, inferSchema } from "./schema";
 import { EtonEncoderStream, EtonDecoderStream } from "./stream";
+import { tomlToEton, type TomlToEtonResult } from "./bridge/toml";
 
-export { serializeDictionary, serializeDictionaryJson, parseDictionary, EtonEncoderStream, EtonDecoderStream, inferSchema, detectRecommendedFormat };
+export { serializeDictionary, serializeDictionaryJson, parseDictionary, EtonEncoderStream, EtonDecoderStream, inferSchema, detectRecommendedFormat, tomlToEton };
+export type { TomlToEtonResult };
 
 /**
  * High-level API: Dump records to ETON string.

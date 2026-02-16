@@ -8,6 +8,7 @@
     "build": "tsc",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "benchmark:reuse": "vite-node benchmarks/benchmark_reuse.ts",
     "lint": "biome check .",
     "lint:fix": "biome check --apply .",
@@ -29,10 +30,11 @@
     "@toon-format/toon": "^2.1.0",
     "@types/iarna__toml": "^2.0.5",
     "@types/node": "^20.11.19",
+    "@vitest/coverage-v8": "^4.0.18",
     "gpt-tokenizer": "^3.4.0",
     "typescript": "^5.3.3",
     "vite-node": "^5.3.0",
-    "vitest": "^1.2.2"
+    "vitest": "^4.0.18"
   },
   "dependencies": {
     "@iarna/toml": "^2.2.5",
