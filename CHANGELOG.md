@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [0.1.3] - 2026-02-16
+
+### Added
+- **Comprehensive Test Suite**: Achieved 87.98% code coverage (migrating from 66%) with 110 tests covering core logic, streams, and edge cases.
+- **Strict Validation**: Implemented runtime type guards (`isSchemaMap`, `toRecords`) to ensure data integrity during schema definition and TOML conversion.
+
+### Changed
+- **Type Safety**: Refactored core modules (`stream`, `schema`, `toml`) to remove unsafe type assertions (`as any`), replacing them with robust helper functions.
+- **Error Handling**: Improved consistency and clarity of human-readable error messages for invalid inputs in Encoder and Decoder.
+- **Robustness**: Standardized null/undefined handling behavior across all stream operations.
+
 ## [0.1.2] - 2026-02-15
 
 ### Fixed

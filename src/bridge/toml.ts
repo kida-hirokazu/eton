@@ -38,19 +38,7 @@ export function tomlToEton(tomlStr: string): TomlToEtonResult {
     // We need to infer schemas.
 
     for (const [key, value] of Object.entries(data)) {
-        let records: Record<string, unknown>[] = [];
-
-        if (Array.isArray(value)) {
-            // [[array_table]]
-            // Check if it's an array of objects
-            if (value.length > 0 && typeof value[0] === "object" && value[0] !== null) {
-                records = value as Record<string, unknown>[];
-            }
-        } else if (typeof value === "object" && value !== null) {
-            // [table] -> Single record
-            // But acts as a list of 1 for ETON encoding
-            records = [value as Record<string, unknown>];
-        }
+        const records = toRecords(value);
 
         // Skip if no records or not an object-based structure
         if (records.length === 0) continue;
@@ -75,4 +63,22 @@ export function tomlToEton(tomlStr: string): TomlToEtonResult {
         schemas,
         state
     };
+}
+
+/**
+ * Helper to convert unknown TOML value to record array
+ */
+function toRecords(value: unknown): Record<string, unknown>[] {
+    if (Array.isArray(value)) {
+        if (value.length > 0 && typeof value[0] === "object" && value[0] !== null) {
+            return value as Record<string, unknown>[];
+        }
+        return [];
+    }
+
+    if (typeof value === "object" && value !== null) {
+        return [value as Record<string, unknown>];
+    }
+
+    return [];
 }

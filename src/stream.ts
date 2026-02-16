@@ -12,7 +12,13 @@ function decodeRow(line: string): string[] {
             relax_column_count: true,
             skip_empty_lines: true
         });
-        if (records.length > 0) return records[0] as string[];
+        if (records.length > 0) {
+            const firstRow = records[0];
+            // Ensure strictly string array to avoid unsafe cast
+            if (Array.isArray(firstRow) && firstRow.every((item: unknown) => typeof item === "string")) {
+                return firstRow as string[];
+            }
+        }
         return [];
     } catch (e) {
         return [];
@@ -217,16 +223,28 @@ export class EtonDecoderStream extends TransformStream<string, Record<string, un
                         }
                         // Unquote - decodeRow handles this now
 
-                        // Number? Boolean?
-                        if (val === "true") val = true as any;
-                        else if (val === "false") val = false as any;
-                        else if (!isNaN(Number(val)) && val !== "") val = Number(val) as any;
-
-                        record[field] = val;
+                        record[field] = parseValue(val);
                     });
                     controller.enqueue(record);
                 }
             }
         });
     }
+}
+
+/**
+ * Helper to parse string values into appropriate types (boolean, number, string)
+ * Used to avoid 'as any' type assertions in decoder logic.
+ */
+function parseValue(val: string): string | number | boolean {
+    if (val === "true") return true;
+    if (val === "false") return false;
+
+    // Check if it's a valid number and not an empty string
+    if (val !== "") {
+        const num = Number(val);
+        if (!isNaN(num)) return num;
+    }
+
+    return val;
 }
