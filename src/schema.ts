@@ -34,10 +34,24 @@ export function validateSchema(schemas: SchemaMap): boolean {
  * Normalize schema input.
  */
 export function normalizeSchema(schemaInput: unknown): SchemaMap {
-    if (!schemaInput || typeof schemaInput !== "object") {
-        throw new Error("Invalid schema input: must be an object/dict.");
+    if (!isSchemaMap(schemaInput)) {
+        throw new Error("Invalid schema input: must be an object/dict where values are lists of strings.");
     }
-    return schemaInput as SchemaMap;
+    return schemaInput;
+}
+
+/**
+ * Type guard for SchemaMap
+ */
+export function isSchemaMap(value: unknown): value is SchemaMap {
+    if (typeof value !== "object" || value === null) return false;
+
+    for (const fields of Object.values(value)) {
+        if (!Array.isArray(fields)) return false;
+        if (!fields.every(f => typeof f === "string")) return false;
+    }
+
+    return true;
 }
 
 /**

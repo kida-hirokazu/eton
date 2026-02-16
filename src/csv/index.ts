@@ -43,5 +43,12 @@ export function decodeRow(line: string): string[] {
     });
 
     if (records.length === 0) return [];
-    return records[0] as string[];
+
+    const firstRow = records[0];
+    // Ensure strictly string array to avoid unsafe cast
+    if (Array.isArray(firstRow) && firstRow.every((item: unknown) => typeof item === "string")) {
+        return firstRow as string[];
+    }
+
+    return [];
 }
