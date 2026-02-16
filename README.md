@@ -112,6 +112,27 @@ console.log(eton);
 // ... (Dictionary)
 ```
 
+## TOML からの変換
+
+```typescript
+import { tomlToEton } from './src/index';
+
+const tomlStr = `
+[[users]]
+id = 1
+name = "Alice"
+role = "Admin"
+
+[[users]]
+id = 2
+name = "Bob"
+role = "User"
+`;
+
+const { eton, schemas, state } = tomlToEton(tomlStr);
+console.log(eton);
+```
+
 ## ストリーミング (Encoder Stream)
 
 ```typescript
